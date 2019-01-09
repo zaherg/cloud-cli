@@ -13,23 +13,39 @@ class UpdateCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'user:update';
+    protected $signature = 'user:update
+                            {--first_name= : Whether the job should be queued}
+                            {--last_name= : Whether the job should be queued}
+                            {--telephone= : Whether the job should be queued}
+                            {--country= : Whether the job should be queued}
+                            {--zipcode= : Whether the job should be queued}';
 
     /**
      * The description of the command.
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Update the current user personal data';
 
     /**
      * Execute the console command.
      *
+     * @param \Cloudflare\API\Endpoints\User $user
      * @return mixed
      */
     public function handle(User $user)
     {
-        $user->updateUserDetails([]);
+        $values = array_where($this->prepareOptions(), function ($value) {
+            return null !== $value;
+        });
+
+        if (count($values) > 0) {
+            $user->updateUserDetails($values);
+        }
+
+        $this->info('User information has been updated with the data you provided');
+        $this->call('user:details');
+
     }
 
     /**
@@ -41,5 +57,16 @@ class UpdateCommand extends Command
     public function schedule(Schedule $schedule): void
     {
         // $schedule->command(static::class)->everyMinute();
+    }
+
+    protected function prepareOptions()
+    {
+        return [
+            'first_name' => $this->option('first_name'),
+            'last_name' => $this->option('last_name'),
+            'telephone' => $this->option('telephone'),
+            'country' => $this->option('country'),
+            'zipcode' => $this->option('zipcode'),
+        ];
     }
 }

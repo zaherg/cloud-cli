@@ -21,7 +21,7 @@ class DetailsCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Get User details';
+    protected $description = 'Get current user details.';
 
     /**
      * Execute the console command.
