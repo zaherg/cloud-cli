@@ -2,17 +2,20 @@
 
 namespace App\Commands\Zone;
 
+use App\Traits\CommonTrait;
+use Cloudflare\API\Endpoints\Zones;
 use Illuminate\Console\Scheduling\Schedule;
 use LaravelZero\Framework\Commands\Command;
 
 class ListZonesCommand extends Command
 {
+    use CommonTrait;
     /**
      * The signature of the command.
      *
      * @var string
      */
-    protected $signature = 'command:name';
+    protected $signature = 'zone:list';
 
     /**
      * The description of the command.
@@ -24,21 +27,36 @@ class ListZonesCommand extends Command
     /**
      * Execute the console command.
      *
+     * @param \Cloudflare\API\Endpoints\Zones $zones
      * @return mixed
      */
-    public function handle()
+    public function handle(Zones $zones)
     {
-        //
+        $header = ['Name', 'Status', 'Plan', 'Dev mode', 'Created on', 'Modified on'];
+        $data = $this->getZones($zones);
+
+        $this->output->section('List of all the Zones you have:');
+
+        $this->table($header, $data);
+
     }
 
     /**
-     * Define the command's schedule.
-     *
-     * @param  \Illuminate\Console\Scheduling\Schedule $schedule
-     * @return void
+     * @param \Cloudflare\API\Endpoints\Zones $zones
+     * @return \Illuminate\Support\Collection
      */
-    public function schedule(Schedule $schedule): void
+    private function getZones(Zones $zones)
     {
-        // $schedule->command(static::class)->everyMinute();
+        return collect($zones->listZones()->result)
+            ->map(function ($zone) {
+                return [
+                    $zone->name,
+                    $zone->status,
+                    $zone->plan->name,
+                    $this->isActive($zone->development_mode),
+                    $this->getDate($zone->created_on),
+                    $this->getDate($zone->modified_on),
+                ];
+            });
     }
 }

@@ -3,7 +3,6 @@
 namespace App\Commands\User;
 
 use Cloudflare\API\Endpoints\User;
-use Illuminate\Console\Scheduling\Schedule;
 use LaravelZero\Framework\Commands\Command;
 
 class UpdateCommand extends Command
@@ -43,23 +42,13 @@ class UpdateCommand extends Command
             $user->updateUserDetails($values);
         }
 
-        $this->info('User information has been updated with the data you provided');
+        $this->output->success('User information has been updated with the data you provided');
+
         $this->call('user:details');
 
     }
 
-    /**
-     * Define the command's schedule.
-     *
-     * @param  \Illuminate\Console\Scheduling\Schedule $schedule
-     * @return void
-     */
-    public function schedule(Schedule $schedule): void
-    {
-        // $schedule->command(static::class)->everyMinute();
-    }
-
-    protected function prepareOptions()
+    protected function prepareOptions(): array
     {
         return [
             'first_name' => $this->option('first_name'),

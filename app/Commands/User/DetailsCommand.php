@@ -2,13 +2,14 @@
 
 namespace App\Commands\User;
 
-use Carbon\Carbon;
+use App\Traits\CommonTrait;
 use Cloudflare\API\Endpoints\User;
-use Illuminate\Console\Scheduling\Schedule;
 use LaravelZero\Framework\Commands\Command;
 
 class DetailsCommand extends Command
 {
+    use CommonTrait;
+
     /**
      * The signature of the command.
      *
@@ -26,28 +27,19 @@ class DetailsCommand extends Command
     /**
      * Execute the console command.
      *
+     * @param \Cloudflare\API\Endpoints\User $user
      * @return mixed
      */
     public function handle(User $user)
     {
         $currentUserDetails = $user->getUserDetails();
 
-        $this->info('Current user details:');
+        $this->output->section('Current user details:');
+
         $this->table(['Key','Value'], $this->generateTable($currentUserDetails));
     }
 
-    /**
-     * Define the command's schedule.
-     *
-     * @param  \Illuminate\Console\Scheduling\Schedule $schedule
-     * @return void
-     */
-    public function schedule(Schedule $schedule): void
-    {
-        // $schedule->command(static::class)->everyMinute();
-    }
-
-    protected function generateTable($currentUserDetails)
+    protected function generateTable($currentUserDetails): array
     {
         return  [
             ['ID' , $currentUserDetails->id],
@@ -65,16 +57,5 @@ class DetailsCommand extends Command
             ['Created On', $this->getDate($currentUserDetails->created_on)],
             ['Modified On', $this->getDate($currentUserDetails->modified_on)],
         ];
-    }
-
-    protected function getDate($date)
-    {
-        return Carbon::createFromTimestamp(strtotime($date))
-            ->toDayDateTimeString();
-    }
-
-    protected function isActive($value)
-    {
-        return $value ? 'Yes' : 'No';
     }
 }
