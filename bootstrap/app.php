@@ -2,6 +2,30 @@
 
 /*
 |--------------------------------------------------------------------------
+| Register The Auto Loader
+|--------------------------------------------------------------------------
+|
+| Composer provides a convenient, automatically generated class loader
+| for our application. We just need to utilize it! We'll require it
+| into the script here so that we do not have to worry about the
+| loading of any our classes "manually". Feels great to relax.
+|
+*/
+
+function includeIfExists($file)
+{
+    return file_exists($file) ? include $file : false;
+}
+
+if ((!$autoloader = includeIfExists(__DIR__.'/../vendor/autoload.php')) && (!$autoloader = includeIfExists(__DIR__.'/../../../autoload.php'))) {
+    echo 'You must set up the project dependencies using `composer install`'.PHP_EOL.
+        'See https://getcomposer.org/download/ for instructions on installing Composer'.PHP_EOL;
+    exit(1);
+}
+
+
+/*
+|--------------------------------------------------------------------------
 | Create The Application
 |--------------------------------------------------------------------------
 |
