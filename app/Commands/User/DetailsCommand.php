@@ -28,6 +28,7 @@ class DetailsCommand extends Command
      * Execute the console command.
      *
      * @param \Cloudflare\API\Endpoints\User $user
+     *
      * @return mixed
      */
     public function handle(User $user)
@@ -36,15 +37,15 @@ class DetailsCommand extends Command
 
         $this->output->section('Current user details:');
 
-        $this->table(['Key','Value'], $this->generateTable($currentUserDetails));
+        $this->table(['Key', 'Value'], $this->generateTable($currentUserDetails));
     }
 
     protected function generateTable($currentUserDetails): array
     {
         return  [
-            ['ID' , $currentUserDetails->id],
+            ['ID', $currentUserDetails->id],
             ['Email', $currentUserDetails->email],
-            ['Name', sprintf('%s, %s',$currentUserDetails->last_name, $currentUserDetails->first_name)],
+            ['Name', sprintf('%s, %s', $currentUserDetails->last_name, $currentUserDetails->first_name)],
             ['Telephone', $currentUserDetails->telephone],
             ['Country', $currentUserDetails->country],
             ['Zipcode', $currentUserDetails->zipcode],

@@ -30,6 +30,7 @@ class UpdateCommand extends Command
      * Execute the console command.
      *
      * @param \Cloudflare\API\Endpoints\User $user
+     *
      * @return mixed
      */
     public function handle(User $user)
@@ -45,7 +46,6 @@ class UpdateCommand extends Command
         $this->output->success('User information has been updated with the data you provided');
 
         $this->call('user:details');
-
     }
 
     protected function prepareOptions(): array

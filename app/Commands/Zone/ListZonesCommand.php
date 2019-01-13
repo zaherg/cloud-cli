@@ -4,7 +4,6 @@ namespace App\Commands\Zone;
 
 use App\Traits\CommonTrait;
 use Cloudflare\API\Endpoints\Zones;
-use Illuminate\Console\Scheduling\Schedule;
 use LaravelZero\Framework\Commands\Command;
 
 class ListZonesCommand extends Command
@@ -28,6 +27,7 @@ class ListZonesCommand extends Command
      * Execute the console command.
      *
      * @param \Cloudflare\API\Endpoints\Zones $zones
+     *
      * @return mixed
      */
     public function handle(Zones $zones)
@@ -38,11 +38,11 @@ class ListZonesCommand extends Command
         $this->output->section('List of all the Zones you have:');
 
         $this->table($header, $data);
-
     }
 
     /**
      * @param \Cloudflare\API\Endpoints\Zones $zones
+     *
      * @return \Illuminate\Support\Collection
      */
     private function getZones(Zones $zones)

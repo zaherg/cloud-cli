@@ -27,10 +27,12 @@ class ListRecordsCommand extends Command
     /**
      * Execute the console command.
      *
-     * @param \Cloudflare\API\Endpoints\DNS $dns
+     * @param \Cloudflare\API\Endpoints\DNS   $dns
      * @param \Cloudflare\API\Endpoints\Zones $zones
-     * @return mixed
+     *
      * @throws \Cloudflare\API\Endpoints\EndpointException
+     *
+     * @return mixed
      */
     public function handle(DNS $dns, Zones $zones)
     {
@@ -42,8 +44,7 @@ class ListRecordsCommand extends Command
     /**
      * Define the command's schedule.
      *
-     * @param  \Illuminate\Console\Scheduling\Schedule $schedule
-     * @return void
+     * @param \Illuminate\Console\Scheduling\Schedule $schedule
      */
     public function schedule(Schedule $schedule): void
     {

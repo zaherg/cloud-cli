@@ -25,6 +25,7 @@ class GetIDCommand extends Command
      * Execute the console command.
      *
      * @param \Cloudflare\API\Endpoints\User $user
+     *
      * @return mixed
      */
     public function handle(User $user)

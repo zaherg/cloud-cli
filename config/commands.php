@@ -76,6 +76,7 @@ return [
     'remove' => [
         // ..
         App\Commands\InspiringCommand::class,
+        App\Commands\Command::class,
         LaravelZero\Framework\Commands\RenameCommand::class,
 //        LaravelZero\Framework\Commands\MakeCommand::class,
 //        LaravelZero\Framework\Commands\BuildCommand::class,
