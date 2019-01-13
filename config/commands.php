@@ -60,6 +60,9 @@ return [
         Illuminate\Console\Scheduling\ScheduleRunCommand::class,
         Illuminate\Console\Scheduling\ScheduleFinishCommand::class,
         Illuminate\Foundation\Console\VendorPublishCommand::class,
+        LaravelZero\Framework\Commands\MakeCommand::class,
+        LaravelZero\Framework\Commands\BuildCommand::class,
+        LaravelZero\Framework\Commands\InstallCommand::class,
     ],
 
     /*
@@ -78,9 +81,7 @@ return [
         App\Commands\InspiringCommand::class,
         App\Commands\Command::class,
         LaravelZero\Framework\Commands\RenameCommand::class,
-//        LaravelZero\Framework\Commands\MakeCommand::class,
-//        LaravelZero\Framework\Commands\BuildCommand::class,
-//        LaravelZero\Framework\Commands\InstallCommand::class,
+
     ],
 
 ];

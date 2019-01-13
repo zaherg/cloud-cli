@@ -3,6 +3,7 @@
 $finder = PhpCsFixer\Finder::create()
     ->name('*.php')
     ->in(__DIR__ . DIRECTORY_SEPARATOR . 'app')
+    ->in(__DIR__ . DIRECTORY_SEPARATOR . 'bootstrap')
     ->in(__DIR__ . DIRECTORY_SEPARATOR . 'tests');
 
 return PhpCsFixer\Config::create()
