@@ -35,7 +35,7 @@ class DetailsCommand extends Command
     {
         $currentUserDetails = $user->getUserDetails();
 
-        $this->output->section('Current user details:');
+        $this->output->title('Current user details:');
 
         $this->table(['Key', 'Value'], $this->generateTable($currentUserDetails));
     }

@@ -65,4 +65,12 @@ class AppServiceProvider extends ServiceProvider
             return new DNS($adapter);
         });
     }
+
+//    protected function checkEnvironmentFile()
+//    {
+//        dd($this);
+//        if (app()->environment('production') && ! Storage::disk('local')->exists('.env')) {
+//            throw new RunTimeException('Please run the init command first');
+//        }
+//    }
 }
