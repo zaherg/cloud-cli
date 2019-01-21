@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Exception;
+use GuzzleHttp\Exception\ServerException;
 use Symfony\Component\Console\Exception\RuntimeException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
@@ -23,6 +24,9 @@ class Handler extends ExceptionHandler
     protected $dontReportMessages = [
         RuntimeException::class => [
             'Not enough arguments',
+        ],
+        ServerException::class => [
+            'Server error:',
         ],
     ];
 
