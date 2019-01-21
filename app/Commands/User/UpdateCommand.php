@@ -13,11 +13,11 @@ class UpdateCommand extends Command
      * @var string
      */
     protected $signature = 'user:update
-                            {--first_name= : Whether the job should be queued}
-                            {--last_name= : Whether the job should be queued}
-                            {--telephone= : Whether the job should be queued}
-                            {--country= : Whether the job should be queued}
-                            {--zipcode= : Whether the job should be queued}';
+                            {--first_name= : First Name}
+                            {--last_name= : Last Name}
+                            {--telephone= : Telephone Number}
+                            {--country= : Country Code}
+                            {--zipcode= : Zip Code}';
 
     /**
      * The description of the command.
