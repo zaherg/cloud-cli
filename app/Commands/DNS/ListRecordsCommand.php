@@ -2,13 +2,16 @@
 
 namespace App\Commands\DNS;
 
+use App\Traits\CommonTrait;
 use Cloudflare\API\Endpoints\DNS;
 use Cloudflare\API\Endpoints\Zones;
-use Illuminate\Console\Scheduling\Schedule;
 use LaravelZero\Framework\Commands\Command;
+use Cloudflare\API\Endpoints\EndpointException;
 
 class ListRecordsCommand extends Command
 {
+    use CommonTrait;
+
     /**
      * The signature of the command.
      *
@@ -30,24 +33,26 @@ class ListRecordsCommand extends Command
      * @param \Cloudflare\API\Endpoints\DNS   $dns
      * @param \Cloudflare\API\Endpoints\Zones $zones
      *
-     * @throws \Cloudflare\API\Endpoints\EndpointException
-     *
      * @return mixed
      */
     public function handle(DNS $dns, Zones $zones)
     {
-        $zoneID = $zones->getZoneID($this->argument('domain'));
+        $this->output->title('List all zone records');
+        try {
+            $zoneID = $zones->getZoneID($this->argument('domain'));
+            $data = collect($dns->listRecords($zoneID)->result)
+                ->map(function ($record) {
+                    return [
+                        $record->type,
+                        $record->name,
+                        $record->content,
+                        $this->isActive($record->proxied),
+                    ];
+                });
 
-        var_dump($dns->listRecords($zoneID)->result);
-    }
-
-    /**
-     * Define the command's schedule.
-     *
-     * @param \Illuminate\Console\Scheduling\Schedule $schedule
-     */
-    public function schedule(Schedule $schedule): void
-    {
-        // $schedule->command(static::class)->everyMinute();
+            $this->table(['Type', 'Name', 'Content', 'Proxied'], $data);
+        } catch (EndpointException $exception) {
+            $this->output->error('Could not find zones with specified name.');
+        }
     }
 }
