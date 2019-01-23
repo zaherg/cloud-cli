@@ -17,6 +17,9 @@
  \_____|_|\___/ \__,_|\__,_|_| |_|\__,_|_|  \___|
                                                  
                                                  
+
+  unreleased
+
   USAGE: cloudflare <command> [options] [arguments]
 
   init             Create the default config environment variables.
@@ -27,10 +30,10 @@
   user:details     Get current user details.
   user:email       Get the current user email.
   user:id          Get the current user id.
-  user:update      Update the current user personal data
+  user:update      Edit part of your user details
 
-  zone:list        Command description
-  zone:purge-all   Purge Cache on Every Website
+  zone:list        List, search, sort, and filter your zones
+  zone:purge-all   Remove ALL files from Cloudflare's cache, for every Website.
 ```
 
 ## License

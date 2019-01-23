@@ -21,7 +21,7 @@ class ListZonesCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'List, search, sort, and filter your zones';
 
     /**
      * Execute the console command.
