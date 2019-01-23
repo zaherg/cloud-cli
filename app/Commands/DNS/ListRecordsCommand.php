@@ -30,9 +30,9 @@ class ListRecordsCommand extends Command
                             {--match= : Whether to match all search requirements or at least one (any), valid values: any, all}
                             {domain : The domain name}';
 
-    protected $name;
-    protected $type;
-    protected $content;
+    protected $recordName;
+    protected $recordType;
+    protected $recordContent;
     protected $page = 1;
     protected $limit = 20;
     protected $order = 'type';
@@ -48,7 +48,7 @@ class ListRecordsCommand extends Command
 
     protected function initialize(InputInterface $input, OutputInterface $output): void
     {
-        $this->content = $this->option('content') ?? '';
+        $this->recordContent = $this->option('content') ?? '';
 
         $this->setRecordName();
         $this->setRecordType();
@@ -75,9 +75,9 @@ class ListRecordsCommand extends Command
 
             $records = $dns->listRecords(
                 $zoneID,
-                $this->type,
-                $this->name,
-                $this->content,
+                $this->recordType,
+                $this->recordName,
+                $this->recordContent,
                 $this->page,
                 $this->limit,
                 $this->order,
@@ -98,7 +98,7 @@ class ListRecordsCommand extends Command
                 });
 
             if (count($data) > 0) {
-                $this->table(['Type', 'Name', 'Content', 'Proxied','Created at','Modified at'], $data);
+                $this->table(['Type', 'Name', 'Content', 'Proxied', 'Created at', 'Modified at'], $data);
             } else {
                 $this->fail('Sorry, we couldn\'t find anything to display');
             }
@@ -149,21 +149,21 @@ class ListRecordsCommand extends Command
 
     private function setRecordType(): void
     {
-        $this->type = strtoupper($this->option('type')) ?? '';
+        $this->recordType = strtoupper($this->option('type')) ?? '';
 
         $types = ['A', 'AAAA', 'CNAME', 'TXT', 'SRV', 'LOC', 'MX', 'NS', 'SPF', 'CERT', 'DNSKEY', 'DS', 'NAPTR', 'SMIMEA', 'SSHFP',
             'TLSA', 'URI', ];
 
-        if (! in_array($this->type, $types, true)) {
-            $this->type = '';
+        if (! in_array($this->recordType, $types, true)) {
+            $this->recordType = '';
         }
     }
 
     private function setRecordName(): void
     {
-        $this->name = strtolower($this->option('name')) ?? '';
+        $this->recordName = strtolower($this->option('name')) ?? '';
 
-        if(strlen($this->name) > 255) {
+        if (strlen($this->recordName) > 255) {
             $this->output->error('The DNS record name should not be more than 255 character.');
             exit;
         }

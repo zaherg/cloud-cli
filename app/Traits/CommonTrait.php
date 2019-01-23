@@ -32,6 +32,6 @@ trait CommonTrait
             $this->output->getFormatter()->setStyle('fail', $style);
         }
 
-        $this->line($string, 'fail', $verbosity);
+        $this->line('[Error] ' . $string, 'fail', $verbosity);
     }
 }
