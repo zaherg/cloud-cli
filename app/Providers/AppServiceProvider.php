@@ -36,7 +36,6 @@ class AppServiceProvider extends ServiceProvider
     protected function registerAPIKey(): void
     {
         $this->app->singleton(APIKey::class, function ($app) {
-
             if ('fake@mail.com' === config('cloudflare.email') || 'dummyAuthKey' === config('cloudflare.key')) {
                 throw new NoConfigFileException('Please make sure to run the init command first');
             }
