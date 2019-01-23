@@ -21,9 +21,8 @@ trait CommonTrait
     /**
      * Write a string as warning output.
      *
-     * @param  string  $string
-     * @param  int|string|null  $verbosity
-     * @return void
+     * @param string          $string
+     * @param int|string|null $verbosity
      */
     public function fail($string, $verbosity = null): void
     {

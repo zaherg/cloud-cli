@@ -8,6 +8,7 @@ use Cloudflare\API\Adapter\Guzzle;
 use Cloudflare\API\Endpoints\User;
 use Cloudflare\API\Endpoints\Zones;
 use Illuminate\Support\ServiceProvider;
+use App\Exceptions\NoConfigFileException;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -35,6 +36,11 @@ class AppServiceProvider extends ServiceProvider
     protected function registerAPIKey(): void
     {
         $this->app->singleton(APIKey::class, function ($app) {
+
+            if ('fake@mail.com' === config('cloudflare.email') || 'dummyAuthKey' === config('cloudflare.key')) {
+                throw new NoConfigFileException('Please make sure to run the init command first');
+            }
+
             return new APIKey(config('cloudflare.email'), config('cloudflare.key'));
         });
     }

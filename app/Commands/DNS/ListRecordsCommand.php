@@ -66,12 +66,11 @@ class ListRecordsCommand extends Command
                     ];
                 });
 
-            if(count($data) > 0) {
+            if (count($data) > 0) {
                 $this->table(['Type', 'Name', 'Content', 'Proxied'], $data);
             } else {
                 $this->fail('Sorry, we couldn\'t find anything to display');
             }
-
         } catch (EndpointException $exception) {
             $this->output->error('Could not find zones with specified name.');
         }
