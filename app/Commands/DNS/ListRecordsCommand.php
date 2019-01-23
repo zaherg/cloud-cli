@@ -48,10 +48,10 @@ class ListRecordsCommand extends Command
 
     protected function initialize(InputInterface $input, OutputInterface $output): void
     {
-        $this->name = strtolower($this->option('name')) ?? '';
         $this->content = $this->option('content') ?? '';
 
-        $this->setType();
+        $this->setRecordName();
+        $this->setRecordType();
         $this->setPage();
         $this->setLimit();
         $this->setOrder();
@@ -147,7 +147,7 @@ class ListRecordsCommand extends Command
         $this->limit = $this->limit < 5 ? 5 : $this->limit;
     }
 
-    private function setType(): void
+    private function setRecordType(): void
     {
         $this->type = strtoupper($this->option('type')) ?? '';
 
@@ -156,6 +156,16 @@ class ListRecordsCommand extends Command
 
         if (! in_array($this->type, $types, true)) {
             $this->type = '';
+        }
+    }
+
+    private function setRecordName(): void
+    {
+        $this->name = strtolower($this->option('name')) ?? '';
+
+        if(strlen($this->name) > 255) {
+            $this->output->error('The DNS record name should not be more than 255 character.');
+            exit;
         }
     }
 }
