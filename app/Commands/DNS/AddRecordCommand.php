@@ -6,7 +6,6 @@ use App\Traits\CommonTrait;
 use Cloudflare\API\Endpoints\DNS;
 use Cloudflare\API\Endpoints\Zones;
 use GuzzleHttp\Exception\ClientException;
-use Illuminate\Console\Parser;
 use LaravelZero\Framework\Commands\Command;
 use Cloudflare\API\Endpoints\EndpointException;
 use Symfony\Component\Console\Input\InputInterface;
@@ -29,13 +28,13 @@ class AddRecordCommand extends Command
      * @var string
      */
     protected $signature = 'dns:add
-                            {--type= : Record type, valid values: A, AAAA, CNAME, TXT, SRV, LOC, MX, NS, SPF, CERT, DNSKEY, DS, NAPTR, SMIMEA, SSHFP, TLSA, URI}
+                            {--type=A : Record type, valid values: A, AAAA, CNAME, TXT, SRV, LOC, MX, NS, SPF, CERT, DNSKEY, DS, NAPTR, SMIMEA, SSHFP, TLSA, URI}
                             {--name= : Record name, max length: 255}
                             {--content= : Record content}
                             {--optional : Whether we should ask for the none required values.}
                             {--proxied : Page number of paginated results, default: false}
-                            {--ttl= : Time to live for DNS record, default: 120, min: 120, max: 2147483647}
-                            {--priority= : Used with some records like MX and SRV to determine priority, default: 10, min: 0, max: 65535}
+                            {--ttl=120 : Time to live for DNS record, default: 120, min: 120, max: 2147483647}
+                            {--priority=10 : Used with some records like MX and SRV to determine priority, default: 10, min: 0, max: 65535}
                             {domain : The domain name}';
 
     /**
@@ -55,12 +54,12 @@ class AddRecordCommand extends Command
      * @see InputInterface::bind()
      * @see InputInterface::validate()
      *
-     * @param \Symfony\Component\Console\Input\InputInterface $input
+     * @param \Symfony\Component\Console\Input\InputInterface   $input
      * @param \Symfony\Component\Console\Output\OutputInterface $output
      */
     protected function initialize(InputInterface $input, OutputInterface $output): void
     {
-        if($this->option('no-interaction')) {
+        if ($this->option('no-interaction')) {
             $this->input->setInteractive(true);
         }
 
@@ -79,7 +78,7 @@ class AddRecordCommand extends Command
      * This means that this is the only place where the command can
      * interactively ask for values of missing required arguments.
      *
-     * @param \Symfony\Component\Console\Input\InputInterface $input
+     * @param \Symfony\Component\Console\Input\InputInterface   $input
      * @param \Symfony\Component\Console\Output\OutputInterface $output
      */
     protected function interact(InputInterface $input, OutputInterface $output)
@@ -205,7 +204,7 @@ class AddRecordCommand extends Command
     private function setRecordProxiedStatus(): void
     {
         if (! $this->option('proxied')) {
-            $this->proxied = $this->ask('Should the record receive the performance and security benefits of Cloudflare?', 'false');
+            $this->proxied = $this->choice('Should the record receive the performance and security benefits of Cloudflare?', ['false', 'true'],0);
             $this->proxied = $this->proxied !== 'false';
         }
     }

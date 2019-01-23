@@ -14,6 +14,15 @@ class ListRecordsCommand extends Command
 {
     use CommonTrait;
 
+    protected $recordName;
+    protected $recordType;
+    protected $recordContent;
+    protected $page = 1;
+    protected $limit = 20;
+    protected $order = 'type';
+    protected $match = 'all';
+    protected $direction = 'desc';
+
     /**
      * The signature of the command.
      *
@@ -23,21 +32,12 @@ class ListRecordsCommand extends Command
                             {--type= : Record type, valid values: A, AAAA, CNAME, TXT, SRV, LOC, MX, NS, SPF, CERT, DNSKEY, DS, NAPTR, SMIMEA, SSHFP, TLSA, URI}
                             {--name= : Record name, max length: 255}
                             {--content= : Record content}
-                            {--limit= : Number of DNS records per page, default: 20, min :5, max :100}
-                            {--page= : Page number of paginated results, default: 1, min :1}
-                            {--order= : Field to order records by, valid values: type, name, content, ttl, proxied}
-                            {--direction= : Direction to order domains, valid values: desc or asc}
-                            {--match= : Whether to match all search requirements or at least one (any), valid values: any, all}
+                            {--limit=10 : Number of DNS records per page, default: 20, min :5, max :100}
+                            {--page=1 : Page number of paginated results, default: 1, min :1}
+                            {--order=type : Field to order records by, valid values: type, name, content, ttl, proxied}
+                            {--direction=desc : Direction to order domains, valid values: desc or asc}
+                            {--match=all : Whether to match all search requirements or at least one (any), valid values: any, all}
                             {domain : The domain name}';
-
-    protected $recordName;
-    protected $recordType;
-    protected $recordContent;
-    protected $page = 1;
-    protected $limit = 20;
-    protected $order = 'type';
-    protected $match = 'all';
-    protected $direction = 'desc';
 
     /**
      * The description of the command.
