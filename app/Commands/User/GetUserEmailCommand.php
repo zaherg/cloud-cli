@@ -5,7 +5,7 @@ namespace App\Commands\User;
 use Cloudflare\API\Endpoints\User;
 use LaravelZero\Framework\Commands\Command;
 
-class GetIDCommand extends Command
+class GetUserEmailCommand extends Command
 {
     /**
      * The signature of the command.

@@ -24,7 +24,7 @@ class UpdateCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Update the current user personal data';
+    protected $description = 'Edit part of your user details';
 
     /**
      * Execute the console command.
