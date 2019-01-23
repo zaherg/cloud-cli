@@ -21,7 +21,7 @@ class ListRecordsCommand extends Command
      */
     protected $signature = 'dns:list-records
                             {--type= : Record type, valid values: A, AAAA, CNAME, TXT, SRV, LOC, MX, NS, SPF, CERT, DNSKEY, DS, NAPTR, SMIMEA, SSHFP, TLSA, URI}
-                            {--name= : Record name}
+                            {--name= : Record name, max length: 255}
                             {--content= : Record content}
                             {--limit= : Number of DNS records per page, default: 20, min :5, max :100}
                             {--page= : Page number of paginated results, default: 1, min :1}
