@@ -6,6 +6,7 @@ use App\Traits\CommonTrait;
 use Cloudflare\API\Endpoints\DNS;
 use Cloudflare\API\Endpoints\Zones;
 use GuzzleHttp\Exception\ClientException;
+use Illuminate\Console\Parser;
 use LaravelZero\Framework\Commands\Command;
 use Cloudflare\API\Endpoints\EndpointException;
 use Symfony\Component\Console\Input\InputInterface;
@@ -31,10 +32,10 @@ class AddRecordCommand extends Command
                             {--type= : Record type, valid values: A, AAAA, CNAME, TXT, SRV, LOC, MX, NS, SPF, CERT, DNSKEY, DS, NAPTR, SMIMEA, SSHFP, TLSA, URI}
                             {--name= : Record name, max length: 255}
                             {--content= : Record content}
-                            {--ttl= : Time to live for DNS record, default: 120, min: 120, max: 2147483647}
-                            {--proxied : Page number of paginated results, default: false}
-                            {--priority= : Used with some records like MX and SRV to determine priority, default: 10, min: 0, max: 65535}
                             {--optional : Whether we should ask for the none required values.}
+                            {--proxied : Page number of paginated results, default: false}
+                            {--ttl= : Time to live for DNS record, default: 120, min: 120, max: 2147483647}
+                            {--priority= : Used with some records like MX and SRV to determine priority, default: 10, min: 0, max: 65535}
                             {domain : The domain name}';
 
     /**
@@ -44,14 +45,56 @@ class AddRecordCommand extends Command
      */
     protected $description = 'Create a new DNS record for a zone.';
 
-    protected function initialize(InputInterface $input, OutputInterface $output)
+    /**
+     * Initializes the command after the input has been bound and before the input
+     * is validated.
+     *
+     * This is mainly useful when a lot of commands extends one main command
+     * where some things need to be initialized based on the input arguments and options.
+     *
+     * @see InputInterface::bind()
+     * @see InputInterface::validate()
+     *
+     * @param \Symfony\Component\Console\Input\InputInterface $input
+     * @param \Symfony\Component\Console\Output\OutputInterface $output
+     */
+    protected function initialize(InputInterface $input, OutputInterface $output): void
     {
+        if($this->option('no-interaction')) {
+            $this->input->setInteractive(true);
+        }
+
         $this->recordName = $this->option('name') ?? $this->recordName;
         $this->recordType = strtoupper($this->option('type')) ?? $this->recordType;
         $this->recordContent = $this->option('content') ?? $this->recordContent;
         $this->recordTtl = (int) ($this->option('ttl') ?? $this->recordTtl);
         $this->proxied = $this->option('proxied');
         $this->priority = (int) ($this->option('priority') ?? $this->priority);
+    }
+
+    /**
+     * Interacts with the user.
+     *
+     * This method is executed before the InputDefinition is validated.
+     * This means that this is the only place where the command can
+     * interactively ask for values of missing required arguments.
+     *
+     * @param \Symfony\Component\Console\Input\InputInterface $input
+     * @param \Symfony\Component\Console\Output\OutputInterface $output
+     */
+    protected function interact(InputInterface $input, OutputInterface $output)
+    {
+        $this->showIntro();
+
+        $this->setRecordName();
+        $this->setRecordType();
+        $this->setRecordContent();
+
+        if ($this->option('optional')) {
+            $this->setRecordTtl();
+            $this->setRecordPriority();
+            $this->setRecordProxiedStatus();
+        }
     }
 
     /**
@@ -68,18 +111,6 @@ class AddRecordCommand extends Command
             $zoneID = $zones->getZoneID($this->argument('domain'));
 
             $this->output->title('Create a new DNS record:');
-
-            $this->showIntro();
-
-            $this->setRecordName();
-            $this->setRecordType();
-            $this->setRecordContent();
-
-            if ($this->option('optional')) {
-                $this->setRecordTtl();
-                $this->setRecordPriority();
-                $this->setRecordProxiedStatus();
-            }
 
             $status = $dns->addRecord(
                 $zoneID,
@@ -121,10 +152,10 @@ class AddRecordCommand extends Command
             'TLSA', 'URI', ];
 
         while (! in_array($this->recordType, $types, true)) {
-            $this->recordType = strtoupper($this->ask(implode([
+            $this->recordType = strtoupper($this->askWithCompletion(implode([
                 'The DNS record type. Valid values are: ',
                 implode($types, ', '),
-            ]), 'A'));
+            ]), $types, 'A'));
         }
     }
 
