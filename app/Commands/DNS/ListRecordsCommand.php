@@ -46,7 +46,7 @@ class ListRecordsCommand extends Command
      */
     protected $description = 'List all the DNS records for a specific domain.';
 
-    protected function initialize(InputInterface $input, OutputInterface $output)
+    protected function initialize(InputInterface $input, OutputInterface $output): void
     {
         $this->name = strtolower($this->option('name')) ?? '';
         $this->content = $this->option('content') ?? '';
