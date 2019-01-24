@@ -21,4 +21,9 @@
             <directory suffix=".php">./app</directory>
         </whitelist>
     </filter>
+    <php>
+        <env name="AUTH_EMAIL" value="fake@email.com"/>
+        <env name="AUTH_KEY" value="dummyAuthKey"/>
+        <env name="APP_ENV" value="testing"/>
+    </php>
 </phpunit>
