@@ -3,7 +3,6 @@
     "description": "A cli application to work with Cloudflare.",
     "keywords": ["domain", "dns", "cloudflare", "console", "cli"],
     "homepage": "https://github.com/linuxjuggler/cloudflare-cli",
-    "type": "project",
     "license": "MIT",
     "support": {
         "issues": "https://github.com/linuxjuggler/cloudflare-cli/issues",
