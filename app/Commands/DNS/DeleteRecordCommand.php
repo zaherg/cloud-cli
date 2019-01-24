@@ -108,7 +108,7 @@ class DeleteRecordCommand extends Command
                 $status ? $this->info(sprintf(
                     'The record %s has been deleted from your DNS Zone : %s .',
                     $this->recordName,
-                    $this->argument('domain')
+                    $this->domain
                 ))
                     : $this->fail('Sorry, something went wrong and we couldn\'t delete the record from your DNS Zone.');
             } else {

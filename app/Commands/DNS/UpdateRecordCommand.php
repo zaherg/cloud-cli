@@ -7,24 +7,29 @@ use App\Traits\CommonTrait;
 use Cloudflare\API\Endpoints\DNS;
 use Cloudflare\API\Endpoints\Zones;
 use GuzzleHttp\Exception\ClientException;
+use App\Exceptions\RecordNotFoundException;
 use LaravelZero\Framework\Commands\Command;
 use Cloudflare\API\Endpoints\EndpointException;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class AddRecordCommand extends Command
+class UpdateRecordCommand extends Command
 {
     use DNSTrait;
     use CommonTrait;
+
+    protected $data;
+    private $newRecordName;
 
     /**
      * The signature of the command.
      *
      * @var string
      */
-    protected $signature = 'dns:add
+    protected $signature = 'dns:update
                             {--type= : Record type, valid values: A, AAAA, CNAME, TXT, SRV, LOC, MX, NS, SPF, CERT, DNSKEY, DS, NAPTR, SMIMEA, SSHFP, TLSA, URI}
                             {--name= : Record name, max length: 255}
+                            {--new-name= : The new record name, max length: 255}
                             {--content= : Record content}
                             {--optional : Whether we should ask for the none required values.}
                             {--proxied : Page number of paginated results, default: false}
@@ -37,7 +42,15 @@ class AddRecordCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Create a new DNS record for a zone';
+    protected $description = 'Update DNS Record';
+
+    public function __construct(DNS $dns, Zones $zones)
+    {
+        parent::__construct();
+
+        $this->dns = $dns;
+        $this->zones = $zones;
+    }
 
     /**
      * Initializes the command after the input has been bound and before the input
@@ -57,6 +70,7 @@ class AddRecordCommand extends Command
         $this->setAlwaysInteract();
 
         $this->recordName = $this->option('name') ?? $this->recordName;
+        $this->newRecordName = $this->option('new-name') ?? $this->newRecordName;
         $this->recordType = strtoupper($this->option('type')) ?? $this->recordType;
         $this->recordContent = $this->option('content') ?? $this->recordContent;
         $this->recordTtl = (int) ($this->option('ttl') ?? $this->recordTtl);
@@ -84,42 +98,47 @@ class AddRecordCommand extends Command
         $this->setDomainArgument();
 
         $this->setRecordName();
+
+        // check for the existence of the record before we continue
+        $this->existedDnsRecord();
+
+        $this->setNewRecordName();
         $this->setRecordType();
         $this->setRecordContent();
 
+        $this->data = [
+            'name' => $this->newRecordName,
+            'type' => $this->recordType,
+            'content' => $this->recordContent,
+        ];
+
         if ($this->option('optional')) {
             $this->setRecordTtl();
-            $this->setRecordPriority();
             $this->setRecordProxiedStatus();
+
+            $this->data = array_merge($this->data, [
+                'ttl' => $this->recordTtl,
+                'proxied' => $this->proxied,
+            ]);
         }
     }
 
     /**
      * Execute the console command.
      *
-     * @param \Cloudflare\API\Endpoints\DNS   $dns
-     * @param \Cloudflare\API\Endpoints\Zones $zones
-     *
      * @return mixed
      */
-    public function handle(DNS $dns, Zones $zones)
+    public function handle()
     {
         try {
-            $zoneID = $zones->getZoneID($this->domain);
+            $zoneID = $this->zones->getZoneID($this->domain);
+            $record = $this->getRecordId();
 
-            $status = $dns->addRecord(
-                $zoneID,
-                $this->recordType,
-                $this->recordName,
-                $this->recordContent,
-                $this->recordTtl,
-                $this->proxied,
-                $this->priority
-            );
+            $status = $this->dns->updateRecordDetails($zoneID, $record->id, $this->data);
 
             $status ? $this->info(sprintf(
-                'A new record %s has been added to your DNS Zone : %s .',
-                $this->recordName,
+                'The record %s has been updated within DNS Zone : %s .',
+                $this->newRecordName,
                 $this->domain
             ))
                 : $this->fail('Sorry, something went wrong and we couldn\'t add the new record to your DNS Zone.');
@@ -131,6 +150,34 @@ class AddRecordCommand extends Command
             $errors->each(function ($error) {
                 $this->fail($error->message);
             });
+        }
+    }
+
+    private function existedDnsRecord(): void
+    {
+        $record = $this->getRecordId();
+
+        if (null === $record) {
+            throw new RecordNotFoundException('Sorry, we couldn\'t find the record you asked for.');
+        }
+    }
+
+    private function getRecordId(): \stdClass
+    {
+        try {
+            $zoneID = $this->zones->getZoneID($this->domain);
+            $name = $this->recordName . '.' . $this->domain;
+
+            return collect($this->dns->listRecords($zoneID, '', $name)->result)->first();
+        } catch (EndpointException $exception) {
+            $this->fail('Could not find zones with specified name.');
+        }
+    }
+
+    private function setNewRecordName(): void
+    {
+        while (! filter_var($this->newRecordName, FILTER_VALIDATE_DOMAIN, FILTER_FLAG_HOSTNAME) || strlen($this->newRecordName) > 255) {
+            $this->newRecordName = strtolower($this->ask('DNS record new name. Valid values can be : example.com, mail.example.com', $this->recordName));
         }
     }
 }

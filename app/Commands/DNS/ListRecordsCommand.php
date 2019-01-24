@@ -86,7 +86,7 @@ class ListRecordsCommand extends Command
     {
         $this->output->title($this->description);
         try {
-            $zoneID = $zones->getZoneID($this->argument('domain'));
+            $zoneID = $zones->getZoneID($this->domain);
 
             $records = $dns->listRecords(
                 $zoneID,
