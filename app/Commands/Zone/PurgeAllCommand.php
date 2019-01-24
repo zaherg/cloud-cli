@@ -20,7 +20,7 @@ class PurgeAllCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Remove ALL files from Cloudflare\'s cache, for every Website.';
+    protected $description = 'Remove ALL files from Cloudflare\'s cache, for every Website';
 
     /**
      * Execute the console command.

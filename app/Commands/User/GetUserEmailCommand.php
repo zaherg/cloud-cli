@@ -19,7 +19,7 @@ class GetUserEmailCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Get the current user email.';
+    protected $description = 'Get the current user email';
 
     /**
      * Execute the console command.

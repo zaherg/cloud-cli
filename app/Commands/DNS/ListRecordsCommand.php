@@ -44,7 +44,7 @@ class ListRecordsCommand extends Command
      *
      * @var string
      */
-    protected $description = 'List, search, sort, and filter a zones\' DNS records.';
+    protected $description = 'List, search, sort, and filter a zones\' DNS records';
 
     protected function initialize(InputInterface $input, OutputInterface $output): void
     {

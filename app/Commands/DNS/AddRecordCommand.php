@@ -42,7 +42,7 @@ class AddRecordCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Create a new DNS record for a zone.';
+    protected $description = 'Create a new DNS record for a zone';
 
     /**
      * Initializes the command after the input has been bound and before the input

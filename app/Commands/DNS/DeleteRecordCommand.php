@@ -30,7 +30,7 @@ class DeleteRecordCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Delete DNS Record.';
+    protected $description = 'Delete DNS Record';
 
     /**
      * The name of the record you want to delete.

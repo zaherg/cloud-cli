@@ -19,7 +19,7 @@ class GetUserIDCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Get the current user id.';
+    protected $description = 'Get the current user id';
 
     /**
      * Execute the console command.

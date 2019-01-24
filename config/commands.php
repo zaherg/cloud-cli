@@ -77,11 +77,8 @@ return [
     */
 
     'remove' => [
-        // ..
-        App\Commands\InspiringCommand::class,
         App\Commands\Command::class,
         LaravelZero\Framework\Commands\RenameCommand::class,
-
     ],
 
 ];

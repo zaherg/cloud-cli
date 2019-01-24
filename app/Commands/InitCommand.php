@@ -21,7 +21,7 @@ class InitCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Create the default config environment variables.';
+    protected $description = 'Create the default config environment variables';
 
     /**
      * Execute the console command.
@@ -35,6 +35,9 @@ class InitCommand extends Command
         $email = strtolower($this->ask('What is your CloudFlare email?'));
         $key = $this->ask('What is your CloudFlare API KEY');
 
-        Storage::disk('local')->put('.env', "AUTH_EMAIL={$email} \nAUTH_KEY={$key}");
+        $this->task($this->description, function() use($email, $key){
+            return Storage::disk('local')
+                ->put('.env', "AUTH_EMAIL={$email} \nAUTH_KEY={$key}");
+        });
     }
 }
