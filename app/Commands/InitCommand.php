@@ -35,7 +35,7 @@ class InitCommand extends Command
         $email = strtolower($this->ask('What is your CloudFlare email?'));
         $key = $this->ask('What is your CloudFlare API KEY');
 
-        $this->task($this->description, function() use($email, $key){
+        $this->task($this->description, function () use ($email, $key) {
             return Storage::disk('local')
                 ->put('.env', "AUTH_EMAIL={$email} \nAUTH_KEY={$key}");
         });

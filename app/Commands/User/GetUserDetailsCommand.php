@@ -6,7 +6,7 @@ use App\Traits\CommonTrait;
 use Cloudflare\API\Endpoints\User;
 use LaravelZero\Framework\Commands\Command;
 
-class DetailsCommand extends Command
+class GetUserDetailsCommand extends Command
 {
     use CommonTrait;
 
@@ -34,7 +34,7 @@ class DetailsCommand extends Command
     public function handle(User $user)
     {
         $currentUserDetails = $user->getUserDetails();
-
+        dd($currentUserDetails);
         $this->output->title($this->description);
 
         $this->table(['Key', 'Value'], $this->generateTable($currentUserDetails));
