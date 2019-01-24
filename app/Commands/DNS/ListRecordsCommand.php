@@ -60,6 +60,21 @@ class ListRecordsCommand extends Command
     }
 
     /**
+     * Interacts with the user.
+     *
+     * This method is executed before the InputDefinition is validated.
+     * This means that this is the only place where the command can
+     * interactively ask for values of missing required arguments.
+     *
+     * @param \Symfony\Component\Console\Input\InputInterface   $input
+     * @param \Symfony\Component\Console\Output\OutputInterface $output
+     */
+    protected function interact(InputInterface $input, OutputInterface $output): void
+    {
+        $this->setDomainArgument();
+    }
+
+    /**
      * Execute the console command.
      *
      * @param \Cloudflare\API\Endpoints\DNS   $dns

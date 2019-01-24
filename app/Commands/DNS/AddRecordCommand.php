@@ -28,7 +28,7 @@ class AddRecordCommand extends Command
      * @var string
      */
     protected $signature = 'dns:add
-                            {--type=A : Record type, valid values: A, AAAA, CNAME, TXT, SRV, LOC, MX, NS, SPF, CERT, DNSKEY, DS, NAPTR, SMIMEA, SSHFP, TLSA, URI}
+                            {--type= : Record type, valid values: A, AAAA, CNAME, TXT, SRV, LOC, MX, NS, SPF, CERT, DNSKEY, DS, NAPTR, SMIMEA, SSHFP, TLSA, URI}
                             {--name= : Record name, max length: 255}
                             {--content= : Record content}
                             {--optional : Whether we should ask for the none required values.}
@@ -59,9 +59,7 @@ class AddRecordCommand extends Command
      */
     protected function initialize(InputInterface $input, OutputInterface $output): void
     {
-        if ($this->option('no-interaction')) {
-            $this->input->setInteractive(true);
-        }
+        $this->setAlwaysInteract();
 
         $this->recordName = $this->option('name') ?? $this->recordName;
         $this->recordType = strtoupper($this->option('type')) ?? $this->recordType;
@@ -69,6 +67,7 @@ class AddRecordCommand extends Command
         $this->recordTtl = (int) ($this->option('ttl') ?? $this->recordTtl);
         $this->proxied = $this->option('proxied');
         $this->priority = (int) ($this->option('priority') ?? $this->priority);
+        $this->domain = $this->argument('domain');
     }
 
     /**
@@ -83,7 +82,11 @@ class AddRecordCommand extends Command
      */
     protected function interact(InputInterface $input, OutputInterface $output)
     {
+        $this->output->title('Create a new DNS record:');
+
         $this->showIntro();
+
+        $this->setDomainArgument();
 
         $this->setRecordName();
         $this->setRecordType();
@@ -108,8 +111,6 @@ class AddRecordCommand extends Command
     {
         try {
             $zoneID = $zones->getZoneID($this->argument('domain'));
-
-            $this->output->title('Create a new DNS record:');
 
             $status = $dns->addRecord(
                 $zoneID,
@@ -204,7 +205,7 @@ class AddRecordCommand extends Command
     private function setRecordProxiedStatus(): void
     {
         if (! $this->option('proxied')) {
-            $this->proxied = $this->choice('Should the record receive the performance and security benefits of Cloudflare?', ['false', 'true'],0);
+            $this->proxied = $this->choice('Should the record receive the performance and security benefits of Cloudflare?', ['false', 'true'], 0);
             $this->proxied = $this->proxied !== 'false';
         }
     }

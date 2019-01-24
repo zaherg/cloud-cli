@@ -7,6 +7,8 @@ use Symfony\Component\Console\Formatter\OutputFormatterStyle;
 
 trait CommonTrait
 {
+    protected $domain;
+
     protected function getDate($date): string
     {
         return Carbon::createFromTimestamp(strtotime($date))
@@ -33,5 +35,20 @@ trait CommonTrait
         }
 
         $this->line('[Error] ' . $string, 'fail', $verbosity);
+    }
+
+    protected function setDomainArgument(): void
+    {
+        while (null === $this->argument('domain') && empty($this->domain)) {
+            $this->domain = trim($this->ask('What is the domain name for the zone'));
+            $this->input->setArgument('domain', $this->domain);
+        }
+    }
+
+    protected function setAlwaysInteract(): void
+    {
+        if ($this->option('no-interaction')) {
+            $this->input->setInteractive(true);
+        }
     }
 }

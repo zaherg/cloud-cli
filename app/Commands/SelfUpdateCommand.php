@@ -42,14 +42,13 @@ class SelfUpdateCommand extends Command
         $updater->getStrategy()->setPharName($this->pharFileName);
         $updater->getStrategy()->setCurrentLocalVersion(app('git.version'));
 
-        if(null !== $this->option('stability') && in_array(strtolower($this->option('stability')),['unstable','any'], true)) {
+        if (null !== $this->option('stability') && in_array(strtolower($this->option('stability')), ['unstable', 'any'], true)) {
             $this->stability = strtolower($this->option('stability'));
         }
 
         $updater->getStrategy()->setStability($this->stability);
 
         try {
-
             $hasUpdate = $updater->hasUpdate();
 
             if ($hasUpdate) {
@@ -60,17 +59,12 @@ class SelfUpdateCommand extends Command
                 $result = $updater->update();
 
                 $result ? $this->info('Updated!') : $this->fail('No update needed!');
-
             } elseif (false === $updater->getNewVersion()) {
-
                 $this->warn('There are no stable builds available.');
             } else {
-
                 $this->info('You have the current stable build installed.');
             }
-
         } catch (\Exception $e) {
-
             $this->fail('Well, something happened! Either an oopsie or something involving hackers.');
             exit(1);
         }
