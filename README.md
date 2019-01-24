@@ -18,25 +18,26 @@
 
 ## Documentation
 
-```                                                                    
+```
   v1.0.1-alpha
 
   USAGE: cloudflare <command> [options] [arguments]
 
-  init             Create the default config environment variables.
+  init             Create the default config environment variables
   self-update      Updates cloudflare phar file to the latest version
 
-  dns:add          Create a new DNS record for a zone.
-  dns:delete       Delete DNS Record.
-  dns:list-records List, search, sort, and filter a zones' DNS records.
+  dns:add          Create a new DNS record for a zone
+  dns:delete       Delete DNS Record
+  dns:list-records List, search, sort, and filter a zones' DNS records
+  dns:update       Update DNS Record
 
-  user:details     Get current user details.
-  user:email       Get the current user email.
-  user:id          Get the current user id.
+  user:details     Get current user details
+  user:email       Get the current user email
+  user:id          Get the current user id
   user:update      Edit part of your user details
 
   zone:list        List, search, sort, and filter your zones
-  zone:purge-all   Remove ALL files from Cloudflare's cache, for every Website.
+  zone:purge-all   Remove ALL files from Cloudflare's cache, for every Website
 ```
 
 ## License
