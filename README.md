@@ -24,7 +24,7 @@
   USAGE: cloudflare <command> [options] [arguments]
 
   init             Create the default config environment variables.
-  self-update      Updates cloudflare to the latest version
+  self-update      Updates cloudflare phar file to the latest version
 
   dns:add          Create a new DNS record for a zone.
   dns:delete       Delete DNS Record.
