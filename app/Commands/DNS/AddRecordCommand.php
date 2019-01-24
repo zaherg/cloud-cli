@@ -33,8 +33,8 @@ class AddRecordCommand extends Command
                             {--content= : Record content}
                             {--optional : Whether we should ask for the none required values.}
                             {--proxied : Page number of paginated results, default: false}
-                            {--ttl=120 : Time to live for DNS record, default: 120, min: 120, max: 2147483647}
-                            {--priority=10 : Used with some records like MX and SRV to determine priority, default: 10, min: 0, max: 65535}
+                            {--ttl= : Time to live for DNS record, default: 120, min: 120, max: 2147483647}
+                            {--priority= : Used with some records like MX and SRV to determine priority, default: 10, min: 0, max: 65535}
                             {domain : The domain name}';
 
     /**
