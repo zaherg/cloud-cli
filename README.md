@@ -27,6 +27,7 @@
   self-update      Updates cloudflare to the latest version
 
   dns:add          Create a new DNS record for a zone.
+  dns:delete       Delete DNS Record.
   dns:list-records List, search, sort, and filter a zones' DNS records.
 
   user:details     Get current user details.
