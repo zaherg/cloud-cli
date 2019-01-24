@@ -1,13 +1,5 @@
 # Cloudflare CLI Application
 
-
-- Built on top of the [Laravel](https://laravel.com) components.
-- Built using [laravel-zero.com](https://laravel-zero.com) components.
-
-------
-
-## Documentation
-
 ```
   _____ _                 _  __ _                   _____ _      _____ 
  / ____| |               | |/ _| |                 / ____| |    |_   _|
@@ -15,9 +7,18 @@
 | |    | |/ _ \| | | |/ _` |  _| |/ _` | '__/ _ \ | |    | |      | |  
 | |____| | (_) | |_| | (_| | | | | (_| | | |  __/ | |____| |____ _| |_ 
  \_____|_|\___/ \__,_|\__,_|_| |_|\__,_|_|  \___|  \_____|______|_____|
-                                                                       
-                                                                       
+```
 
+
+- Built on top of the [Laravel](https://laravel.com) components.
+- Built using [laravel-zero.com](https://laravel-zero.com) components.
+- Built using [Cloudflare SDK](https://github.com/cloudflare/cloudflare-php) (v4 API Binding for PHP 7).
+
+------
+
+## Documentation
+
+```                                                                    
   v1.0.1-alpha
 
   USAGE: cloudflare <command> [options] [arguments]
