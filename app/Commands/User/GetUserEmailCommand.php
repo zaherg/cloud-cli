@@ -30,6 +30,8 @@ class GetUserEmailCommand extends Command
      */
     public function handle(User $user)
     {
+        $this->output->title($this->description);
+
         $this->line($user->getUserEmail());
     }
 }

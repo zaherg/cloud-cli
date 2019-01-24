@@ -30,6 +30,8 @@ class GetUserIDCommand extends Command
      */
     public function handle(User $user)
     {
+        $this->output->title($this->description);
+
         $this->line($user->getUserID());
     }
 }

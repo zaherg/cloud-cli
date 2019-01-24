@@ -27,7 +27,7 @@ class SelfUpdateCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Updates cloudflare to the latest version';
+    protected $description = 'Updates cloudflare phar file to the latest version';
 
     /**
      * Execute the console command.
@@ -36,6 +36,8 @@ class SelfUpdateCommand extends Command
      */
     public function handle()
     {
+        $this->output->title($this->description);
+
         $updater = new Updater(null, false);
         $updater->setStrategy(Updater::STRATEGY_GITHUB);
         $updater->getStrategy()->setPackageName($this->githubRepo);

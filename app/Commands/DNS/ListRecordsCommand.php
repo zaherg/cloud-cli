@@ -84,7 +84,7 @@ class ListRecordsCommand extends Command
      */
     public function handle(DNS $dns, Zones $zones)
     {
-        $this->output->title('List all zone records');
+        $this->output->title($this->description);
         try {
             $zoneID = $zones->getZoneID($this->argument('domain'));
 

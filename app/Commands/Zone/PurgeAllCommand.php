@@ -37,7 +37,7 @@ class PurgeAllCommand extends Command
             $this->output->getFormatter()->setStyle('fail', $style);
         }
 
-        $this->output->title('Purge Cache on Every Website:');
+        $this->output->title($this->description);
 
         collect($zones->listZones()->result)
             ->each(function ($zone) use ($zones) {

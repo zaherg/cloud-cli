@@ -35,7 +35,7 @@ class ListZonesCommand extends Command
         $header = ['Name', 'Status', 'Plan', 'Dev mode', 'Created on', 'Modified on'];
         $data = $this->getZones($zones);
 
-        $this->output->title('List of all the Zones you have:');
+        $this->output->title($this->description);
 
         $this->table($header, $data);
     }

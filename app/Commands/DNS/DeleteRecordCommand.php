@@ -72,6 +72,8 @@ class DeleteRecordCommand extends Command
      */
     protected function interact(InputInterface $input, OutputInterface $output): void
     {
+        $this->output->title($this->description);
+
         $this->setDomainArgument();
 
         $this->setNameOption();

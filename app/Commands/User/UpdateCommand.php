@@ -35,6 +35,8 @@ class UpdateCommand extends Command
      */
     public function handle(User $user)
     {
+        $this->output->title($this->description);
+
         $values = array_where($this->prepareOptions(), function ($value) {
             return null !== $value;
         });

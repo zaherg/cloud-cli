@@ -30,6 +30,8 @@ class InitCommand extends Command
      */
     public function handle()
     {
+        $this->output->title($this->description);
+
         $email = strtolower($this->ask('What is your CloudFlare email?'));
         $key = $this->ask('What is your CloudFlare API KEY');
 
