@@ -9,20 +9,21 @@
 ## Documentation
 
 ```
-  _____ _                 _  __ _                
- / ____| |               | |/ _| |               
-| |    | | ___  _   _  __| | |_| | __ _ _ __ ___ 
-| |    | |/ _ \| | | |/ _` |  _| |/ _` | '__/ _ \
-| |____| | (_) | |_| | (_| | | | | (_| | | |  __/
- \_____|_|\___/ \__,_|\__,_|_| |_|\__,_|_|  \___|
-                                                 
-                                                 
+  _____ _                 _  __ _                   _____ _      _____ 
+ / ____| |               | |/ _| |                 / ____| |    |_   _|
+| |    | | ___  _   _  __| | |_| | __ _ _ __ ___  | |    | |      | |  
+| |    | |/ _ \| | | |/ _` |  _| |/ _` | '__/ _ \ | |    | |      | |  
+| |____| | (_) | |_| | (_| | | | | (_| | | |  __/ | |____| |____ _| |_ 
+ \_____|_|\___/ \__,_|\__,_|_| |_|\__,_|_|  \___|  \_____|______|_____|
+                                                                       
+                                                                       
 
-  unreleased
+  v1.0.1-alpha
 
   USAGE: cloudflare <command> [options] [arguments]
 
   init             Create the default config environment variables.
+  self-update      Updates cloudflare to the latest version
 
   dns:add          Create a new DNS record for a zone.
   dns:list-records List, search, sort, and filter a zones' DNS records.
