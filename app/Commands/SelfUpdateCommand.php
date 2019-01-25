@@ -27,7 +27,7 @@ class SelfUpdateCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Updates cloudflare phar file to the latest version';
+    protected $description = 'Updates cloud cli phar file to the latest version';
 
     /**
      * Execute the console command.

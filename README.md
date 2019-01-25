@@ -45,7 +45,7 @@
 I know I didn't write much, but as always you can list all available commands using the following command:
 
 ```bash
-$ cloudflare list
+$ cloud list
 ```
 
 ### Initiate the config values
@@ -57,7 +57,7 @@ After your API key displays, record it for use later.
 To setup your credentials you should run the following command:
 
 ```bash
-$ cloudflare init
+$ cloud init
 ``` 
 
 And you will be asked to enter your email and API Key
@@ -89,14 +89,14 @@ If you did anything wrong, you can run the command again to recreate the file
 If you have downloaded the Phar file, you can update it to the latest version using the command
 
 ```bash
-$ cloudflare self-update
+$ cloud self-update
 ```
 
 More information about the usage of the command is listed below:
 
 ```bash
 Description:
-  Updates cloudflare phar file to the latest version
+  Updates cloud cli phar file to the latest version
 
 Usage:
   self-update [options]
@@ -111,7 +111,7 @@ Options:
 To retrieve the information about your account, you can run the command:
 
 ```
-$ cloudflare user:details
+$ cloud user:details
 ```
 
 
