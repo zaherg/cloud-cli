@@ -1,12 +1,12 @@
 {
-    "name": "zaherg/cloudflare-cli",
+    "name": "zaherg/cloud-cli",
     "description": "A cli application to work with Cloudflare.",
-    "keywords": ["domain", "dns", "cloudflare", "console", "cli"],
+    "keywords": ["domain", "dns", "cloudflare", "console", "cli","cloud"],
     "homepage": "https://github.com/linuxjuggler/cloudflare-cli",
     "license": "MIT",
     "support": {
-        "issues": "https://github.com/linuxjuggler/cloudflare-cli/issues",
-        "source": "https://github.com/linuxjuggler/cloudflare-cli"
+        "issues": "https://github.com/linuxjuggler/cloud-cli/issues",
+        "source": "https://github.com/linuxjuggler/cloud-cli"
     },
     "authors": [
         {

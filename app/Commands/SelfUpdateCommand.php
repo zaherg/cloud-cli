@@ -10,8 +10,8 @@ class SelfUpdateCommand extends Command
 {
     use CommonTrait;
 
-    protected $githubRepo = 'zaherg/cloudflare-cli';
-    protected $pharFileName = 'cloudflare';
+    protected $githubRepo = 'zaherg/cloud-cli';
+    protected $pharFileName = 'cloud';
     protected $stability = 'stable';
 
     /**
