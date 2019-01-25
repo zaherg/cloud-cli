@@ -40,32 +40,6 @@ class AddRecordCommand extends Command
     protected $description = 'Create a new DNS record for a zone';
 
     /**
-     * Initializes the command after the input has been bound and before the input
-     * is validated.
-     *
-     * This is mainly useful when a lot of commands extends one main command
-     * where some things need to be initialized based on the input arguments and options.
-     *
-     * @see InputInterface::bind()
-     * @see InputInterface::validate()
-     *
-     * @param \Symfony\Component\Console\Input\InputInterface   $input
-     * @param \Symfony\Component\Console\Output\OutputInterface $output
-     */
-    protected function initialize(InputInterface $input, OutputInterface $output): void
-    {
-        $this->setAlwaysInteract();
-
-        $this->recordName = $this->option('name') ?? $this->recordName;
-        $this->recordType = strtoupper($this->option('type')) ?? $this->recordType;
-        $this->recordContent = $this->option('content') ?? $this->recordContent;
-        $this->recordTtl = (int) ($this->option('ttl') ?? $this->recordTtl);
-        $this->proxied = $this->option('proxied');
-        $this->priority = (int) ($this->option('priority') ?? $this->priority);
-        $this->domain = $this->argument('domain');
-    }
-
-    /**
      * Interacts with the user.
      *
      * This method is executed before the InputDefinition is validated.
