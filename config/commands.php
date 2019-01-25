@@ -63,6 +63,7 @@ return [
         LaravelZero\Framework\Commands\MakeCommand::class,
         LaravelZero\Framework\Commands\BuildCommand::class,
         LaravelZero\Framework\Commands\InstallCommand::class,
+        LaravelZero\Framework\Commands\RenameCommand::class,
     ],
 
     /*
@@ -77,8 +78,6 @@ return [
     */
 
     'remove' => [
-        App\Commands\Command::class,
-        LaravelZero\Framework\Commands\RenameCommand::class,
     ],
 
 ];

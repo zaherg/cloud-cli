@@ -1,18 +1,18 @@
-# Cloudflare CLI Application
+# Cloud CLI Application for Cloudflare®
 
 ```
-  _____ _                 _  __ _                   _____ _      _____ 
- / ____| |               | |/ _| |                 / ____| |    |_   _|
-| |    | | ___  _   _  __| | |_| | __ _ _ __ ___  | |    | |      | |  
-| |    | |/ _ \| | | |/ _` |  _| |/ _` | '__/ _ \ | |    | |      | |  
-| |____| | (_) | |_| | (_| | | | | (_| | | |  __/ | |____| |____ _| |_ 
- \_____|_|\___/ \__,_|\__,_|_| |_|\__,_|_|  \___|  \_____|______|_____|
+  _____ _                 _    _____ _      _____ 
+ / ____| |               | |  / ____| |    |_   _|
+| |    | | ___  _   _  __| | | |    | |      | |  
+| |    | |/ _ \| | | |/ _` | | |    | |      | |  
+| |____| | (_) | |_| | (_| | | |____| |____ _| |_ 
+ \_____|_|\___/ \__,_|\__,_|  \_____|______|_____|
 ```
 
 
 - Built on top of the [Laravel](https://laravel.com) components.
 - Built using [laravel-zero.com](https://laravel-zero.com) components.
-- Built using [Cloudflare SDK](https://github.com/cloudflare/cloudflare-php) (v4 API Binding for PHP 7).
+- Built using [Cloudflare® SDK](https://github.com/cloudflare/cloudflare-php) (v4 API Binding for PHP 7).
 
 ------
 
@@ -21,7 +21,7 @@
 ```
   v1.0.1-alpha
 
-  USAGE: cloudflare <command> [options] [arguments]
+  USAGE: cloud <command> [options] [arguments]
 
   init             Create the default config environment variables
   self-update      Updates cloudflare phar file to the latest version
@@ -40,6 +40,113 @@
   zone:purge-all   Remove ALL files from Cloudflare's cache, for every Website
 ```
 
+## Usage
+
+I know I didn't write much, but as always you can list all available commands using the following command:
+
+```bash
+$ cloudflare list
+```
+
+### Initiate the config values
+
+Before doing anything , you need to retrieve your CloudFlare API key. Log into the CloudFlare console and navigate 
+to My Settings. Scroll down until you find the API Key item and press the button labeled View API Key. 
+After your API key displays, record it for use later.
+
+To setup your credentials you should run the following command:
+
+```bash
+$ cloudflare init
+``` 
+
+And you will be asked to enter your email and API Key
+
+```
+Create the default config environment variables
+===============================================
+
+ What is your CloudFlare email?:
+ > youremail@provider.com
+
+ What is your CloudFlare API KEY:
+ > yourAPIKey
+
+```
+
+If everything went as planned you will get a feedback about the process:
+
+```
+Create the default config environment variables: ✔
+```
+
+Your config information will be saved at `<your_home_directory>/.cloudflare/.env` file.
+
+If you did anything wrong, you can run the command again to recreate the file
+
+### Self update the phar file
+
+If you have downloaded the Phar file, you can update it to the latest version using the command
+
+```bash
+$ cloudflare self-update
+```
+
+More information about the usage of the command is listed below:
+
+```bash
+Description:
+  Updates cloudflare phar file to the latest version
+
+Usage:
+  self-update [options]
+
+Options:
+      --stability[=STABILITY]  Set the stability flag for the downloaded file. Valid values: stable,unstable, any. [default: "stable"]
+```
+
+
+### Get the details about your account
+
+To retrieve the information about your account, you can run the command:
+
+```
+$ cloudflare user:details
+```
+
+
+## TODO:
+
+- [ ] Write more documentation
+
+## Progress 
+
+__PS__ : I may not be able to cover all the functionality, especially if they are not available for the free plan.
+
+#### Finished
+
+- [x] User Administration (partial)
+
+#### Work in progress
+
+- [ ] [DNS Records](https://www.cloudflare.com/dns/)
+- [ ] Zones
+
+#### Not started yet
+
+- [ ] [Cloudflare® IPs](https://www.cloudflare.com/ips/)
+- [ ] [Page Rules](https://support.cloudflare.com/hc/en-us/articles/200168306-Is-there-a-tutorial-for-Page-Rules-)
+- [ ] [Web Application Firewall (WAF)](https://www.cloudflare.com/waf/)
+- [ ] Virtual DNS Management
+- [ ] Custom hostnames
+- [ ] Manage TLS settings
+- [ ] Zone Lockdown and User-Agent Block rules
+- [ ] Organization Administration
+- [ ] [Railgun](https://www.cloudflare.com/railgun/) administration
+- [ ] [Keyless SSL](https://blog.cloudflare.com/keyless-ssl-the-nitty-gritty-technical-details/)
+- [ ] [Origin CA](https://blog.cloudflare.com/universal-ssl-encryption-all-the-way-to-the-origin-for-free/)
+
+ 
 ## License
 
-Cloudflare CLI Application is an open-source software licensed under the [MIT license](LICENSE.md).
+CLI Application for Cloudflare® is an open-source software licensed under the [MIT license](LICENSE.md).

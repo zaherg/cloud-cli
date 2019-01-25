@@ -57,5 +57,5 @@
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
-    "bin": ["cloudflare"]
+    "bin": ["cloud"]
 }
