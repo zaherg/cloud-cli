@@ -19,7 +19,7 @@
 ## Documentation
 
 ```
-  v1.0.1-alpha
+  v1.0.1-alpha1
 
   USAGE: cloud <command> [options] [arguments]
 
