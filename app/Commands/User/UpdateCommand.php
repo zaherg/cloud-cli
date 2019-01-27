@@ -13,11 +13,11 @@ class UpdateCommand extends Command
      * @var string
      */
     protected $signature = 'user:update
-                            {--first_name= : First Name}
-                            {--last_name= : Last Name}
-                            {--telephone= : Telephone Number}
-                            {--country= : Country Code}
-                            {--zipcode= : Zip Code}';
+                            {--first_name= : User\'s first name}
+                            {--last_name= : User\'s last name}
+                            {--telephone= : User\'s telephone number}
+                            {--country= : The country in which the user lives}
+                            {--zipcode= : The zipcode or postal code where the user lives}';
 
     /**
      * The description of the command.

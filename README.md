@@ -40,6 +40,8 @@
   zone:purge-all   Remove ALL files from Cloudflare's cache, for every Website
 ```
 
+Please check the [docs](./docs) directory for more details about each command.
+
 ## Usage
 
 I know I didn't write much, but as always you can list all available commands using the following command:
@@ -84,41 +86,11 @@ Your config information will be saved at `<your_home_directory>/.cloudflare/.env
 
 If you did anything wrong, you can run the command again to recreate the file
 
-### Self update the phar file
-
-If you have downloaded the Phar file, you can update it to the latest version using the command
-
-```bash
-$ cloud self-update
-```
-
-More information about the usage of the command is listed below:
-
-```bash
-Description:
-  Updates cloud cli phar file to the latest version
-
-Usage:
-  self-update [options]
-
-Options:
-      --dev             Update to the dev (unstable) version
-      --any             Update to the dev (any) version
-```
-
-
-### Get the details about your account
-
-To retrieve the information about your account, you can run the command:
-
-```
-$ cloud user:details
-```
-
 
 ## TODO:
 
-- [ ] Write more documentation
+- [ ] Write more documentation.
+- [ ] Write tests.
 
 ## Progress 
 
