@@ -102,7 +102,8 @@ Usage:
   self-update [options]
 
 Options:
-      --stability[=STABILITY]  Set the stability flag for the downloaded file. Valid values: stable,unstable, any. [default: "stable"]
+      --dev             Update to the dev (unstable) version
+      --any             Update to the dev (any) version
 ```
 
 

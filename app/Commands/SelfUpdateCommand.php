@@ -5,6 +5,8 @@ namespace App\Commands;
 use App\Traits\CommonTrait;
 use Humbug\SelfUpdate\Updater;
 use LaravelZero\Framework\Commands\Command;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 
 class SelfUpdateCommand extends Command
 {
@@ -20,7 +22,8 @@ class SelfUpdateCommand extends Command
      * @var string
      */
     protected $signature = 'self-update
-                            {--stability=stable : Set the stability flag for the downloaded file. Valid values: stable,unstable, any.}';
+                            {--dev : Update to the dev (unstable) version}
+                            {--any : Update to the dev (any) version}';
 
     /**
      * The description of the command.
@@ -28,6 +31,17 @@ class SelfUpdateCommand extends Command
      * @var string
      */
     protected $description = 'Updates cloud cli phar file to the latest version';
+
+    protected function initialize(InputInterface $input, OutputInterface $output): void
+    {
+        if($this->option('dev')) {
+            $this->stability = 'unstable';
+        }
+
+        if($this->option('any')) {
+            $this->stability = 'any';
+        }
+    }
 
     /**
      * Execute the console command.
@@ -43,11 +57,6 @@ class SelfUpdateCommand extends Command
         $updater->getStrategy()->setPackageName($this->githubRepo);
         $updater->getStrategy()->setPharName($this->pharFileName);
         $updater->getStrategy()->setCurrentLocalVersion(app('git.version'));
-
-        if (null !== $this->option('stability') && in_array(strtolower($this->option('stability')), ['unstable', 'any'], true)) {
-            $this->stability = strtolower($this->option('stability'));
-        }
-
         $updater->getStrategy()->setStability($this->stability);
 
         try {
