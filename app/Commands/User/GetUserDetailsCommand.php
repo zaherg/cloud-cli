@@ -34,7 +34,7 @@ class GetUserDetailsCommand extends Command
     public function handle(User $user)
     {
         $currentUserDetails = $user->getUserDetails();
-        dd($currentUserDetails);
+
         $this->output->title($this->description);
 
         $this->table(['Key', 'Value'], $this->generateTable($currentUserDetails));

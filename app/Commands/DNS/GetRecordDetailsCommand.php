@@ -2,13 +2,13 @@
 
 namespace App\Commands\DNS;
 
-use App\Exceptions\RecordNotFoundException;
-use App\Traits\CommonTrait;
 use App\Traits\DNSTrait;
+use App\Traits\CommonTrait;
 use Cloudflare\API\Endpoints\DNS;
-use Cloudflare\API\Endpoints\EndpointException;
 use Cloudflare\API\Endpoints\Zones;
+use App\Exceptions\RecordNotFoundException;
 use LaravelZero\Framework\Commands\Command;
+use Cloudflare\API\Endpoints\EndpointException;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -51,7 +51,6 @@ class GetRecordDetailsCommand extends Command
     {
         $this->setAlwaysInteract();
 
-
         $this->recordName = $this->option('name') ?? $this->recordName;
     }
 
@@ -79,8 +78,9 @@ class GetRecordDetailsCommand extends Command
     /**
      * Execute the console command.
      *
-     * @param \Cloudflare\API\Endpoints\DNS $dns
+     * @param \Cloudflare\API\Endpoints\DNS   $dns
      * @param \Cloudflare\API\Endpoints\Zones $zones
+     *
      * @return mixed
      */
     public function handle(DNS $dns, Zones $zones)
@@ -95,7 +95,7 @@ class GetRecordDetailsCommand extends Command
                 throw new RecordNotFoundException('Sorry, we couldn\'t find the record you asked for.');
             }
 
-            if($this->option('json')) {
+            if ($this->option('json')) {
                 $this->line(collect($record)->toJson());
                 exit(0);
             }
@@ -113,8 +113,6 @@ class GetRecordDetailsCommand extends Command
             $this->output->writeln(sprintf('<info>Is locked?</info> %s', $this->isActive($record->locked)));
             $this->output->writeln(sprintf('<info>Created at</info>: %s', $this->formatDate($record->created_on)));
             $this->output->writeln(sprintf('<info>Modified at</info>: %s', $this->formatDate($record->modified_on)));
-
-
         } catch (EndpointException $exception) {
             $this->fail('Could not find zones with specified name.');
         }

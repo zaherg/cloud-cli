@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Cloudflare\API\Auth\APIKey;
 use Cloudflare\API\Endpoints\DNS;
+use Cloudflare\API\Endpoints\IPs;
 use Cloudflare\API\Adapter\Guzzle;
 use Cloudflare\API\Endpoints\User;
 use Cloudflare\API\Endpoints\Zones;
@@ -31,6 +32,8 @@ class AppServiceProvider extends ServiceProvider
         $this->registerZones();
 
         $this->registerDNS();
+
+        $this->registerIPs();
     }
 
     protected function registerAPIKey(): void
@@ -71,11 +74,12 @@ class AppServiceProvider extends ServiceProvider
         });
     }
 
-//    protected function checkEnvironmentFile()
-//    {
-//        dd($this);
-//        if (app()->environment('production') && ! Storage::disk('local')->exists('.env')) {
-//            throw new RunTimeException('Please run the init command first');
-//        }
-//    }
+    protected function registerIPs(): void
+    {
+        $this->app->singleton(IPs::class, function ($app) {
+            $adapter = new Guzzle($app->make(APIKey::class));
+
+            return new IPs($adapter);
+        });
+    }
 }

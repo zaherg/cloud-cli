@@ -34,11 +34,11 @@ class SelfUpdateCommand extends Command
 
     protected function initialize(InputInterface $input, OutputInterface $output): void
     {
-        if($this->option('dev')) {
+        if ($this->option('dev')) {
             $this->stability = 'unstable';
         }
 
-        if($this->option('any')) {
+        if ($this->option('any')) {
             $this->stability = 'any';
         }
     }
