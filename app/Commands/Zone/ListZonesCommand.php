@@ -54,8 +54,8 @@ class ListZonesCommand extends Command
                     $zone->status,
                     $zone->plan->name,
                     $this->isActive($zone->development_mode),
-                    $this->getDate($zone->created_on),
-                    $this->getDate($zone->modified_on),
+                    $this->formatDate($zone->created_on),
+                    $this->formatDate($zone->modified_on),
                 ];
             });
     }

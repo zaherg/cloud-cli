@@ -55,8 +55,8 @@ class GetUserDetailsCommand extends Command
             ['Business account', $this->isActive($currentUserDetails->has_business_zones)],
             ['Enterprise account', $this->isActive($currentUserDetails->has_enterprise_zones)],
             ['Suspended', $this->isActive($currentUserDetails->suspended)],
-            ['Created On', $this->getDate($currentUserDetails->created_on)],
-            ['Modified On', $this->getDate($currentUserDetails->modified_on)],
+            ['Created On', $this->formatDate($currentUserDetails->created_on)],
+            ['Modified On', $this->formatDate($currentUserDetails->modified_on)],
         ];
     }
 }

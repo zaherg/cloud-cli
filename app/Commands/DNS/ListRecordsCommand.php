@@ -107,8 +107,8 @@ class ListRecordsCommand extends Command
                         $record->name,
                         $record->content,
                         $this->isActive($record->proxied),
-                        $this->getDate($record->created_on),
-                        $this->getDate($record->modified_on),
+                        $this->formatDate($record->created_on),
+                        $this->formatDate($record->modified_on),
                     ];
                 });
 

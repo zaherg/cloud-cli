@@ -9,7 +9,7 @@ trait CommonTrait
 {
     protected $domain;
 
-    protected function getDate($date): string
+    protected function formatDate($date): string
     {
         return Carbon::createFromTimestamp(strtotime($date))
             ->toDayDateTimeString();
