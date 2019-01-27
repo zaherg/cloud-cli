@@ -99,10 +99,10 @@ __PS__ : I may not be able to cover all the functionality, especially if they ar
 #### Finished
 
 - [x] User Administration (partial)
+- [x] [DNS Records](https://www.cloudflare.com/dns/)
 
 #### Work in progress
 
-- [ ] [DNS Records](https://www.cloudflare.com/dns/)
 - [ ] Zones
 
 #### Not started yet
