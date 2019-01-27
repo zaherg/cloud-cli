@@ -12,7 +12,7 @@ class ListAllIPsCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'ip:list-all';
+    protected $signature = 'ips:list-all';
 
     /**
      * The description of the command.
