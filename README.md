@@ -39,6 +39,7 @@
   user:id          Get the current user id
   user:update      Edit part of your user details
 
+  zone:check-activation Initiate another zone activation check
   zone:list        List, search, sort, and filter your zones
   zone:purge-all   Remove ALL files from Cloudflare's cache, for every Website
 ```
