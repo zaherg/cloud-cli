@@ -46,11 +46,11 @@ class ListAllIPsCommand extends Command
 
         if ($ipv4->count() > $ipv6->count()) {
             $data = collect($ipv4)->map(function ($item, $key) use ($ipv6) {
-                return [$item , $ipv6[$key] ?? null];
+                return [$item, $ipv6[$key] ?? null];
             });
         } else {
             $data = collect($ipv6)->map(function ($item, $key) use ($ipv4) {
-                return [$item , $ipv4[$key] ?? null];
+                return [$item, $ipv4[$key] ?? null];
             });
         }
 

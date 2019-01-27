@@ -24,12 +24,15 @@
   USAGE: cloud <command> [options] [arguments]
 
   init             Create the default config environment variables
-  self-update      Updates cloudflare phar file to the latest version
+  self-update      Updates cloud cli phar file to the latest version
 
   dns:add          Create a new DNS record for a zone
   dns:delete       Delete DNS Record
+  dns:details      DNS Record Details
   dns:list-records List, search, sort, and filter a zones' DNS records
   dns:update       Update DNS Record
+
+  ips:list-all     Get Cloudflare IPs
 
   user:details     Get current user details
   user:email       Get the current user email
@@ -100,6 +103,7 @@ __PS__ : I may not be able to cover all the functionality, especially if they ar
 
 - [x] User Administration (partial)
 - [x] [DNS Records](https://www.cloudflare.com/dns/)
+- [x] [Cloudflare® IPs](https://www.cloudflare.com/ips/)
 
 #### Work in progress
 
@@ -107,7 +111,6 @@ __PS__ : I may not be able to cover all the functionality, especially if they ar
 
 #### Not started yet
 
-- [ ] [Cloudflare® IPs](https://www.cloudflare.com/ips/)
 - [ ] [Page Rules](https://support.cloudflare.com/hc/en-us/articles/200168306-Is-there-a-tutorial-for-Page-Rules-)
 - [ ] [Web Application Firewall (WAF)](https://www.cloudflare.com/waf/)
 - [ ] Virtual DNS Management
