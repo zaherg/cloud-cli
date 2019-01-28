@@ -32,6 +32,30 @@ class SelfUpdateCommand extends Command
      */
     protected $description = 'Updates cloud cli phar file to the latest version';
 
+    /**
+     * Configures the current command.
+     */
+    protected function configure(): void
+    {
+        $help = [
+            'The <info>self-update</info> command checks the repository for newer',
+            'versions of cloud cli and if found, installs the latest.' ,
+            '<info>php cloud.phar self-update</info>'
+        ];
+
+        $this->setHelp(implode($help,"\n"));
+    }
+
+    /**
+     * Initializes the command after the input has been bound and before the input
+     * is validated.
+     *
+     * This is mainly useful when a lot of commands extends one main command
+     * where some things need to be initialized based on the input arguments and options.
+     *
+     * @see InputInterface::bind()
+     * @see InputInterface::validate()
+     */
     protected function initialize(InputInterface $input, OutputInterface $output): void
     {
         if ($this->option('dev')) {

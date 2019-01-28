@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b15e0e81b330417abbe3b9ec51749ecf",
+    "content-hash": "20e10df3e1647a5e5f54a36b8c2b8bff",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -106,16 +106,16 @@
         },
         {
             "name": "composer/ca-bundle",
-            "version": "1.1.3",
+            "version": "1.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/ca-bundle.git",
-                "reference": "8afa52cd417f4ec417b4bfe86b68106538a87660"
+                "reference": "558f321c52faeb4828c03e7dc0cfe39a09e09a2d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/ca-bundle/zipball/8afa52cd417f4ec417b4bfe86b68106538a87660",
-                "reference": "8afa52cd417f4ec417b4bfe86b68106538a87660",
+                "url": "https://api.github.com/repos/composer/ca-bundle/zipball/558f321c52faeb4828c03e7dc0cfe39a09e09a2d",
+                "reference": "558f321c52faeb4828c03e7dc0cfe39a09e09a2d",
                 "shasum": ""
             },
             "require": {
@@ -158,7 +158,7 @@
                 "ssl",
                 "tls"
             ],
-            "time": "2018-10-18T06:09:13+00:00"
+            "time": "2019-01-28T09:30:10+00:00"
         },
         {
             "name": "container-interop/container-interop",
@@ -553,7 +553,7 @@
         },
         {
             "name": "illuminate/cache",
-            "version": "v5.7.21",
+            "version": "v5.7.22",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/cache.git",
@@ -602,7 +602,7 @@
         },
         {
             "name": "illuminate/config",
-            "version": "v5.7.21",
+            "version": "v5.7.22",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/config.git",
@@ -646,7 +646,7 @@
         },
         {
             "name": "illuminate/console",
-            "version": "v5.7.21",
+            "version": "v5.7.22",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/console.git",
@@ -696,7 +696,7 @@
         },
         {
             "name": "illuminate/container",
-            "version": "v5.7.21",
+            "version": "v5.7.22",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/container.git",
@@ -741,7 +741,7 @@
         },
         {
             "name": "illuminate/contracts",
-            "version": "v5.7.21",
+            "version": "v5.7.22",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
@@ -785,7 +785,7 @@
         },
         {
             "name": "illuminate/events",
-            "version": "v5.7.21",
+            "version": "v5.7.22",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/events.git",
@@ -830,7 +830,7 @@
         },
         {
             "name": "illuminate/filesystem",
-            "version": "v5.7.21",
+            "version": "v5.7.22",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/filesystem.git",
@@ -882,7 +882,7 @@
         },
         {
             "name": "illuminate/support",
-            "version": "v5.7.20",
+            "version": "v5.7.22",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/support.git",
@@ -1460,21 +1460,21 @@
         },
         {
             "name": "nunomaduro/laravel-console-summary",
-            "version": "v1.0.4",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nunomaduro/laravel-console-summary.git",
-                "reference": "dd3be06e03946137f98670d00f5d10e89a5f3cf2"
+                "reference": "fac5ca9f0d9dc184996f37cf371c680048f8cbef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nunomaduro/laravel-console-summary/zipball/dd3be06e03946137f98670d00f5d10e89a5f3cf2",
-                "reference": "dd3be06e03946137f98670d00f5d10e89a5f3cf2",
+                "url": "https://api.github.com/repos/nunomaduro/laravel-console-summary/zipball/fac5ca9f0d9dc184996f37cf371c680048f8cbef",
+                "reference": "fac5ca9f0d9dc184996f37cf371c680048f8cbef",
                 "shasum": ""
             },
             "require": {
-                "illuminate/console": "5.6.*|5.7.*",
-                "illuminate/support": "5.6.*|5.7.*",
+                "illuminate/console": "5.6.*|5.7.*|5.8.*",
+                "illuminate/support": "5.6.*|5.7.*|5.8.*",
                 "php": ">=7.1.3"
             },
             "type": "library",
@@ -1511,25 +1511,25 @@
                 "php",
                 "symfony"
             ],
-            "time": "2018-08-26T23:04:18+00:00"
+            "time": "2019-01-23T19:04:32+00:00"
         },
         {
             "name": "nunomaduro/laravel-console-task",
-            "version": "v1.1.0",
+            "version": "v1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nunomaduro/laravel-console-task.git",
-                "reference": "84bc8bd88003f145a801f143bc58e0573b65877b"
+                "reference": "712bda357b6fd09e54ff2f8d37de2188982ef4fd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nunomaduro/laravel-console-task/zipball/84bc8bd88003f145a801f143bc58e0573b65877b",
-                "reference": "84bc8bd88003f145a801f143bc58e0573b65877b",
+                "url": "https://api.github.com/repos/nunomaduro/laravel-console-task/zipball/712bda357b6fd09e54ff2f8d37de2188982ef4fd",
+                "reference": "712bda357b6fd09e54ff2f8d37de2188982ef4fd",
                 "shasum": ""
             },
             "require": {
-                "illuminate/console": "~5.5.26|5.6.*|5.7.*",
-                "illuminate/support": "~5.5.26|5.6.*|5.7.*",
+                "illuminate/console": "~5.5.26|5.6.*|5.7.*|5.8.*",
+                "illuminate/support": "~5.5.26|5.6.*|5.7.*|5.8.*",
                 "php": "^7.0"
             },
             "require-dev": {
@@ -1569,25 +1569,25 @@
                 "php",
                 "symfony"
             ],
-            "time": "2018-12-17T21:22:07+00:00"
+            "time": "2019-01-23T18:08:55+00:00"
         },
         {
             "name": "nunomaduro/laravel-desktop-notifier",
-            "version": "v2.0.6",
+            "version": "v2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nunomaduro/laravel-desktop-notifier.git",
-                "reference": "9cf87364f021c3d411770cb34e46e6a656dab928"
+                "reference": "50a91b569268770647e3f4e9cfeaeb7bfb77ae26"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nunomaduro/laravel-desktop-notifier/zipball/9cf87364f021c3d411770cb34e46e6a656dab928",
-                "reference": "9cf87364f021c3d411770cb34e46e6a656dab928",
+                "url": "https://api.github.com/repos/nunomaduro/laravel-desktop-notifier/zipball/50a91b569268770647e3f4e9cfeaeb7bfb77ae26",
+                "reference": "50a91b569268770647e3f4e9cfeaeb7bfb77ae26",
                 "shasum": ""
             },
             "require": {
-                "illuminate/console": "5.6.*|5.7.*",
-                "illuminate/support": "5.6.*|5.7.*",
+                "illuminate/console": "5.6.*|5.7.*|5.8.*",
+                "illuminate/support": "5.6.*|5.7.*|5.8.*",
                 "jolicode/jolinotif": "^2.0",
                 "php": "^7.1.3"
             },
@@ -1635,7 +1635,7 @@
                 "php",
                 "wrapper"
             ],
-            "time": "2018-08-26T22:58:22+00:00"
+            "time": "2019-01-23T18:58:44+00:00"
         },
         {
             "name": "padraic/humbug_get_contents",
