@@ -37,9 +37,9 @@ class ListAllIPsCommand extends Command
             $this->output->title($this->description);
             $results = $ips->listIPs();
 
-            ['header' =>$header, 'items' => $items] = $this->formatArray($results);
+            ['header' => $header, 'items' => $items] = $this->formatArray($results);
 
-            $this->line('| '.$items[0][0].'  | '.$items[0][1].' |');
+            $this->line('| ' . $items[0][0] . '  | ' . $items[0][1] . ' |');
 
             $this->table($header, $items);
         } catch (ClientException $exception) {
@@ -58,7 +58,7 @@ class ListAllIPsCommand extends Command
             $data['items'] = collect($ipv4)->map(function ($item, $key) use ($ipv6) {
                 return [$item, $ipv6[$key] ?? null];
             })->toArray();
-        } elseif($ipv4->count() === $ipv6->count()) {
+        } elseif ($ipv4->count() === $ipv6->count()) {
             $data['items'] = collect($ipv4)->map(function ($item, $key) use ($ipv6) {
                 return [$item, $ipv6[$key] ?? null];
             })->toArray();
