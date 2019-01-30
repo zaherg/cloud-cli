@@ -1,9 +1,10 @@
 # Cloud CLI Application for Cloudflare®
 
-<p align="left">
-<a href="https://travis-ci.org/linuxjuggler/cloud-cli"><img src="https://travis-ci.org/linuxjuggler/cloud-cli.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/zaherg/cloud-cli"><img src="https://poser.pugx.org/zaherg/cloud-cli/license.svg" alt="License"></a>
-</p>
+[![Build Status](https://secure.travis-ci.org/linuxjuggler/cloud-cli.svg)](http://travis-ci.org/linuxjuggler/cloud-cli)
+[![Latest Stable Version](https://poser.pugx.org/zaherg/cloud-cli/v/stable)](https://packagist.org/packages/zaherg/cloud-cli)
+[![Latest Unstable Version](https://poser.pugx.org/zaherg/cloud-cli/v/unstable)](https://packagist.org/packages/zaherg/cloud-cli)
+[![License](https://poser.pugx.org/zaherg/cloud-cli/license)](https://packagist.org/packages/zaherg/cloud-cli)
+[![composer.lock available](https://poser.pugx.org/zaherg/cloud-cli/composerlock)](https://packagist.org/packages/zaherg/cloud-cli)
 
 ```
   _____ _                 _    _____ _      _____ 
