@@ -1,6 +1,6 @@
 # Cloud CLI Application for Cloudflare®
 
-<p align="center">
+<p align="left">
 <a href="https://travis-ci.org/linuxjuggler/cloud-cli"><img src="https://travis-ci.org/linuxjuggler/cloud-cli.svg" alt="Build Status"></a>
 <a href="https://packagist.org/packages/zaherg/cloud-cli"><img src="https://poser.pugx.org/zaherg/cloud-cli/license.svg" alt="License"></a>
 </p>
