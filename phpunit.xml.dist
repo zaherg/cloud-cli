@@ -10,7 +10,7 @@
          stopOnFailure="false">
     <testsuites>
         <testsuite name="Feature">
-            <directory suffix="Test.php">./tests/Feature</directory>
+            <directory suffix="Test.php">./tests</directory>
         </testsuite>
     </testsuites>
     <listeners>
@@ -22,8 +22,8 @@
         </whitelist>
     </filter>
     <php>
-        <env name="AUTH_EMAIL" value="fake@email.com"/>
-        <env name="AUTH_KEY" value="dummyAuthKey"/>
+        <env name="AUTH_EMAIL" value="example@example.com"/>
+        <env name="AUTH_KEY" value="1234567893feefc5f0q5000bfo0c38d90bbeb"/>
         <env name="APP_ENV" value="testing"/>
     </php>
 </phpunit>
