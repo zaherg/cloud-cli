@@ -6,12 +6,12 @@ HERE := $(shell dirname $(THIS))
 all: lint test
 
 fix:
-	php $(HERE)/vendor/bin/php-cs-fixer fix --config=$(HERE)/.php_cs
+	php ./vendor/bin/php-cs-fixer fix --config=./.php_cs
 
 lint:
-	php $(HERE)/vendor/bin/php-cs-fixer fix --config=$(HERE)/.php_cs --dry-run
-	php $(HERE)/vendor/bin/phpmd app/ text cleancode,codesize,controversial,design,naming
-	php $(HERE)/vendor/bin/phpmd tests/ text cleancode,codesize,controversial,design,naming,unusedcode
+	php ./vendor/bin/php-cs-fixer fix --config=./.php_cs --dry-run
+	php ./vendor/bin/phpmd app/ text cleancode,codesize,controversial,design,naming
+	php ./vendor/bin/phpmd tests/ text cleancode,codesize,controversial,design,naming,unusedcode
 
 test:
-	php $(HERE)/vendor/bin/phpunit --configuration $(HERE)/phpunit.xml.dist
+	php ./vendor/bin/phpunit --configuration ./phpunit.xml.dist

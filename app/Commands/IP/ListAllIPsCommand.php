@@ -2,11 +2,14 @@
 
 namespace App\Commands\IP;
 
+use App\Traits\CommonTrait;
 use Cloudflare\API\Endpoints\IPs;
+use GuzzleHttp\Exception\ClientException;
 use LaravelZero\Framework\Commands\Command;
 
 class ListAllIPsCommand extends Command
 {
+    use CommonTrait;
     /**
      * The signature of the command.
      *
@@ -30,13 +33,18 @@ class ListAllIPsCommand extends Command
      */
     public function handle(IPs $ips)
     {
-        $this->output->title($this->description);
-        $results = $ips->listIPs();
+        try {
+            $this->output->title($this->description);
+            $results = $ips->listIPs();
 
-        $items = $this->formatArray($results);
+            ['header' =>$header, 'items' => $items] = $this->formatArray($results);
 
-        $header = ['IPv4', 'IPv6'];
-        $this->table($header, $items);
+            $this->line('| '.$items[0][0].'  | '.$items[0][1].' |');
+
+            $this->table($header, $items);
+        } catch (ClientException $exception) {
+            $this->fail('Sorry something went wrong.');
+        }
     }
 
     private function formatArray($results)
@@ -44,16 +52,24 @@ class ListAllIPsCommand extends Command
         $ipv4 = collect($results->ipv4_cidrs);
         $ipv6 = collect($results->ipv6_cidrs);
 
+        $data['header'] = ['IPv4', 'IPv6'];
+
         if ($ipv4->count() > $ipv6->count()) {
-            $data = collect($ipv4)->map(function ($item, $key) use ($ipv6) {
+            $data['items'] = collect($ipv4)->map(function ($item, $key) use ($ipv6) {
                 return [$item, $ipv6[$key] ?? null];
-            });
+            })->toArray();
+        } elseif($ipv4->count() === $ipv6->count()) {
+            $data['items'] = collect($ipv4)->map(function ($item, $key) use ($ipv6) {
+                return [$item, $ipv6[$key] ?? null];
+            })->toArray();
         } else {
-            $data = collect($ipv6)->map(function ($item, $key) use ($ipv4) {
+            $data['items'] = collect($ipv6)->map(function ($item, $key) use ($ipv4) {
                 return [$item, $ipv4[$key] ?? null];
-            });
+            })->toArray();
+
+            $data['header'] = ['IPv6', 'IPv4'];
         }
 
-        return $data->toArray();
+        return $data;
     }
 }

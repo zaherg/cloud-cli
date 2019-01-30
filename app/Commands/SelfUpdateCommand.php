@@ -39,11 +39,11 @@ class SelfUpdateCommand extends Command
     {
         $help = [
             'The <info>self-update</info> command checks the repository for newer',
-            'versions of cloud cli and if found, installs the latest.' ,
-            '<info>php cloud.phar self-update</info>'
+            'versions of cloud cli and if found, installs the latest.',
+            '<info>php cloud.phar self-update</info>',
         ];
 
-        $this->setHelp(implode($help,"\n"));
+        $this->setHelp(implode($help, "\n"));
     }
 
     /**

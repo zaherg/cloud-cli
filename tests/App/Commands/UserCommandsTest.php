@@ -2,8 +2,8 @@
 
 namespace Tests\App\Commands;
 
-use Cloudflare\API\Endpoints\User;
 use Tests\TestCase;
+use Cloudflare\API\Endpoints\User;
 
 class UserCommandsTest extends TestCase
 {
@@ -49,7 +49,7 @@ class UserCommandsTest extends TestCase
     {
         $user = $this->createMock(User::class);
         $user->method('updateUserDetails')
-            ->with($this->equalTo(['first_name' => 'John','last_name' => 'Doe']))
+            ->with($this->equalTo(['first_name' => 'John', 'last_name' => 'Doe']))
             ->willReturn($this->getFixtures('updateUserDetails'));
 
         $user->method('getUserDetails')
@@ -57,14 +57,14 @@ class UserCommandsTest extends TestCase
 
         $this->instance(User::class, $user);
 
-        $this->artisan('user:update',['--first_name' => 'John', '--last_name' => 'Doe'])
+        $this->artisan('user:update', ['--first_name' => 'John', '--last_name' => 'Doe'])
             ->expectsOutput('Get current user details')
             ->expectsOutput('| ID                 | 7c5dae5552338874e5053f2534d2767a |')
             ->expectsOutput('| Email              | user2@example.com                |')
             ->expectsOutput('| Name               | Doe, John                        |')
             ->assertExitCode(0);
 
-        $this->assertCommandCalled('user:update',['--first_name' => 'John', '--last_name' => 'Doe']);
+        $this->assertCommandCalled('user:update', ['--first_name' => 'John', '--last_name' => 'Doe']);
 
         $this->assertCommandCalled('user:details');
     }
@@ -73,6 +73,7 @@ class UserCommandsTest extends TestCase
      * This function will Mock the User API Endpoint.
      *
      * @param string $function
+     *
      * @return mixed
      */
     protected function mockUser($function = 'getUserDetails')
@@ -82,4 +83,3 @@ class UserCommandsTest extends TestCase
             ->once();
     }
 }
-
