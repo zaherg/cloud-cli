@@ -21,10 +21,7 @@ class DnsCommandsTest extends TestCase
      */
     public function testDnsListRecordsCommand(): void
     {
-        $this->mock(DNS::class)
-            ->shouldReceive('listRecords')
-            ->once()
-            ->andReturn($this->getFixtures('listRecords'));
+        $this->mockDNS();
 
         $this->mockZone();
 
@@ -41,10 +38,7 @@ class DnsCommandsTest extends TestCase
      */
     public function testGetDnsDetailsCommand(): void
     {
-        $this->mock(DNS::class)
-            ->shouldReceive('listRecords')
-            ->once()
-            ->andReturn($this->getFixtures('listRecords'));
+        $this->mockDNS();
 
         $this->mockZone();
 
@@ -57,7 +51,6 @@ class DnsCommandsTest extends TestCase
             ->assertExitCode(0);
 
         $this->assertCommandCalled('dns:details', ['domain' => 'example.com', '--name' => 'example.com']);
-
     }
 
 //    /*
@@ -82,5 +75,13 @@ class DnsCommandsTest extends TestCase
             ->shouldReceive('getZoneID')
             ->once()
             ->andReturn('023e105f4ecef8ad9ca31a8372d0c353');
+    }
+
+    protected function mockDNS($function = 'listRecords', $file = 'listRecords')
+    {
+        $this->mock(DNS::class)
+            ->shouldReceive($function)
+            ->once()
+            ->andReturn($this->getFixtures($file));
     }
 }

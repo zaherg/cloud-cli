@@ -19,7 +19,8 @@ abstract class TestCase extends BaseTestCase
     /**
      * Specify output that should be printed when the command runs.
      *
-     * @param  string  $output
+     * @param string $output
+     *
      * @return $this
      */
     public function expectsOutputContains($output)
