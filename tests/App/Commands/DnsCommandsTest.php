@@ -11,10 +11,46 @@ class DnsCommandsTest extends TestCase
     /*
      * dns:add               Create a new DNS record for a zone
      */
-//    public function testDnsAddCommand(): void
-//    {
-//        $this->markTestIncomplete('This test has not been implemented yet.');
-//    }
+    public function testDnsAddCommandWhileAskingQuestions(): void
+    {
+        $this->mockZone();
+        $this->mockDnsForManipulation();
+
+        $this->artisan('dns:add')
+            ->expectsQuestion('What is the domain name for the zone', 'example.com')
+            ->expectsQuestion('DNS record name. Valid values can be : example.com, mail.example.com', 'example.com')
+            ->expectsQuestion('The DNS record type. Valid values are: A, AAAA, CNAME, TXT, SRV, LOC, MX, NS, SPF, CERT, DNSKEY, DS, NAPTR, SMIMEA, SSHFP, TLSA, URI', 'A')
+            ->expectsQuestion('DNS record content', '1.2.3.4')
+            ->expectsOutput('A new record example.com has been added to your DNS Zone : example.com .')
+            ->assertExitCode(0);
+
+        $this->assertCommandCalled('dns:add');
+    }
+
+    /*
+     * dns:add               Create a new DNS record for a zone
+     */
+    public function testDnsAddCommandByPassingValues(): void
+    {
+        $this->mockZone();
+        $this->mockDnsForManipulation();
+
+        $this->artisan('dns:add', [
+            'domain' => 'example.com',
+            '--type' => 'a',
+            '--name' => 'example.com',
+            '--content' => '1.2.3.4',
+        ])
+            ->expectsOutput('A new record example.com has been added to your DNS Zone : example.com .')
+            ->assertExitCode(0);
+
+        $this->assertCommandCalled('dns:add', [
+            'domain' => 'example.com',
+            '--type' => 'a',
+            '--name' => 'example.com',
+            '--content' => '1.2.3.4',
+        ]);
+    }
 
     /*
      * dns:list-records      List, search, sort, and filter a zones' DNS records
@@ -83,5 +119,23 @@ class DnsCommandsTest extends TestCase
             ->shouldReceive($function)
             ->once()
             ->andReturn($this->getFixtures($file));
+    }
+
+    protected function mockDnsForManipulation($function = 'addRecord'): void
+    {
+        $dns = $this->createMock(DNS::class);
+        $dns->method($function)
+            ->with(
+                $this->equalTo('023e105f4ecef8ad9ca31a8372d0c353'),
+                $this->equalTo('A'),
+                $this->equalTo('example.com'),
+                $this->equalTo('1.2.3.4'),
+                $this->equalTo(120),
+                $this->equalTo(false),
+                $this->equalTo(10)
+            )
+            ->willReturn(true);
+
+        $this->instance(DNS::class, $dns);
     }
 }
