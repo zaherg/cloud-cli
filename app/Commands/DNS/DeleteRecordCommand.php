@@ -92,7 +92,7 @@ class DeleteRecordCommand extends Command
         try {
             $zoneID = $zones->getZoneID($this->domain);
 
-            $name = $this->recordName . '.' . $this->domain;
+            $name = $this->recordName === $this->domain ? $this->recordName . '.' . $this->domain : $this->domain;
 
             $record = collect($dns->listRecords($zoneID, '', $name)->result)->first();
 

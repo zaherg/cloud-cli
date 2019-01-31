@@ -57,7 +57,7 @@ class DnsCommandsTest extends TestCase
      */
     public function testDnsListRecordsCommand(): void
     {
-        $this->mockDNS();
+        $this->mockDNS('listRecords', $this->getFixtures('listRecords'));
 
         $this->mockZone();
 
@@ -74,7 +74,7 @@ class DnsCommandsTest extends TestCase
      */
     public function testGetDnsDetailsCommand(): void
     {
-        $this->mockDNS();
+        $this->mockDNS('listRecords', $this->getFixtures('listRecords'));
 
         $this->mockZone();
 
@@ -97,13 +97,61 @@ class DnsCommandsTest extends TestCase
 //        $this->markTestIncomplete('This test has not been implemented yet.');
 //    }
 //
-//    /*
-//     * dns:delete            Delete DNS Record
-//     */
-//    public function testDnsDeleteCommand(): void
-//    {
-//        $this->markTestIncomplete('This test has not been implemented yet.');
-//    }
+    /*
+     * dns:delete            Delete DNS Record
+     */
+    public function testDnsDeleteCommand(): void
+    {
+        $this->mockZone();
+
+        $dns = $this->createMock(DNS::class);
+
+        $dns->method('listRecords')
+            ->willReturn($this->getFixtures('listRecords'));
+
+        $dns->method('deleteRecord')
+            ->willReturn(true);
+
+        $this->instance(DNS::class, $dns);
+
+        $this->artisan('dns:delete',[
+            'domain' => 'example.com',
+            '--name' => 'example.com'
+        ])
+            ->expectsQuestion('Are you sure you want to delete the record example.com ?','yes')
+            ->expectsOutput('The record example.com has been deleted from your DNS Zone : example.com .')
+            ->assertExitCode(0);
+
+        $this->assertCommandCalled('dns:delete', ['domain' => 'example.com', '--name' => 'example.com']);
+    }
+
+    /*
+     * dns:delete            Delete DNS Record
+     */
+    public function testDnsDeleteCommandWhileAskingQuestions(): void
+    {
+        $this->mockZone();
+
+        $dns = $this->createMock(DNS::class);
+
+        $dns->method('listRecords')
+            ->willReturn($this->getFixtures('listRecords'));
+
+        $dns->method('deleteRecord')
+            ->willReturn(true);
+
+        $this->instance(DNS::class, $dns);
+
+        $this->artisan('dns:delete')
+            ->expectsQuestion('What is the domain name for the zone', 'example.com')
+            ->expectsQuestion('What is the name of the record you want to delete', 'example.com')
+            ->expectsQuestion('Are you sure you want to delete the record example.com ?','yes')
+            ->expectsOutput('The record example.com has been deleted from your DNS Zone : example.com .')
+            ->assertExitCode(0);
+
+        $this->assertCommandCalled('dns:delete');
+
+    }
 
     protected function mockZone()
     {
@@ -113,12 +161,12 @@ class DnsCommandsTest extends TestCase
             ->andReturn('023e105f4ecef8ad9ca31a8372d0c353');
     }
 
-    protected function mockDNS($function = 'listRecords', $file = 'listRecords')
+    protected function mockDNS($function, $returnedValue)
     {
-        $this->mock(DNS::class)
+        return $this->mock(DNS::class)
             ->shouldReceive($function)
             ->once()
-            ->andReturn($this->getFixtures($file));
+            ->andReturn($returnedValue);
     }
 
     protected function mockDnsForManipulation($function = 'addRecord'): void
