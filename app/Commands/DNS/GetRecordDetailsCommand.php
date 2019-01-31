@@ -87,7 +87,8 @@ class GetRecordDetailsCommand extends Command
     {
         try {
             $zoneID = $zones->getZoneID($this->domain);
-            $name = $this->recordName . '.' . $this->domain;
+
+            $name = ($this->recordName !== $this->domain) ? $this->recordName . '.' . $this->domain : '';
 
             $record = collect($dns->listRecords($zoneID, '', $name)->result)->first();
 
@@ -99,8 +100,6 @@ class GetRecordDetailsCommand extends Command
                 $this->line(collect($record)->toJson());
                 exit(0);
             }
-
-            $this->output->section('DNS Record Details:');
 
             $this->output->writeln(sprintf('<info>Record ID</info>: %s', $record->id));
             $this->output->writeln(sprintf('<info>Record type</info>: %s', $record->type));

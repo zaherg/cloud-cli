@@ -7,7 +7,7 @@ use Cloudflare\API\Endpoints\User;
 
 class UserCommandsTest extends TestCase
 {
-    public function testGetUserDetailsCommand()
+    public function testGetUserDetailsCommand(): void
     {
         $this->mockUser()
             ->andReturn($this->getFixtures('getUserDetails')->result);

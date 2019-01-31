@@ -15,4 +15,17 @@ abstract class TestCase extends BaseTestCase
             File::get(base_path(sprintf('tests/Fixtures/Endpoints/%s.json', $fileName)))
         );
     }
+
+    /**
+     * Specify output that should be printed when the command runs.
+     *
+     * @param  string  $output
+     * @return $this
+     */
+    public function expectsOutputContains($output)
+    {
+        $this->test->expectedOutput[] = $output;
+
+        return $this;
+    }
 }

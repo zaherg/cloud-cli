@@ -56,7 +56,7 @@ trait DNSTrait
             $displayed = true;
         }
 
-        if (! $displayed && $this->option('optional') && in_array(null, array_only($this->options(), ['ttl', 'proxied', 'priority']), true)) {
+        if ($this->hasOption('optional') && ! $displayed && $this->option('optional') && in_array(null, array_only($this->options(), ['ttl', 'proxied', 'priority']), true)) {
             $this->output->block($message);
         }
     }

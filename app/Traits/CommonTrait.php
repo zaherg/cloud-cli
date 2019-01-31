@@ -39,6 +39,10 @@ trait CommonTrait
 
     protected function setDomainArgument(): void
     {
+        if (null !== $this->argument('domain')) {
+            $this->domain = $this->argument('domain');
+        }
+
         while (null === $this->argument('domain') && empty($this->domain)) {
             $this->domain = trim($this->ask('What is the domain name for the zone'));
             $this->input->setArgument('domain', $this->domain);

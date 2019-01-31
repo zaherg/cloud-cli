@@ -7,7 +7,7 @@ use Cloudflare\API\Endpoints\IPs;
 
 class IPsCommandsTest extends TestCase
 {
-    public function testListAllIpsCommand()
+    public function testListAllIpsCommand(): void
     {
         $this->mock(IPs::class)
             ->shouldReceive('listIPs')
