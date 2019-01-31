@@ -89,14 +89,50 @@ class DnsCommandsTest extends TestCase
         $this->assertCommandCalled('dns:details', ['domain' => 'example.com', '--name' => 'example.com']);
     }
 
-//    /*
-//     * dns:update            Update DNS Record
-//     */
+    /*
+     * dns:update            Update DNS Record
+     */
 //    public function testDnsEditCommand(): void
 //    {
+//        $this->mockZone();
+//
+////        $dns = $this->createMock(DNS::class);
+//        $dns = $this->getMockBuilder(DNS::class)
+//            ->setMethods(['listRecords'])
+//            ->getMock();
+//
+//        $dns->method('listRecords')
+//            ->willReturn($this->getFixtures('listRecords'));
+//
+//        $dns->method('updateRecordDetails')
+//            ->with(
+//                $this->equalTo('023e105f4ecef8ad9ca31a8372d0c353'),
+//                $this->equalTo('372e67954025e0ba6aaa6d586b9e0b59'),
+//                ['type' => 'A', 'name' => 'example.com', 'content' => '1.2.3.4']
+//            )
+//            ->willReturn(true);
+//
+//        $this->instance(DNS::class, $dns);
+//
+//        $this->artisan('dns:update', [
+//            'domain' => 'example.com',
+//            '--type' => 'a',
+//            '--name' => 'example.com',
+//            '--content' => '1.2.3.4',
+//        ])
+//            ->expectsOutput('The record example.com has been updated within DNS Zone : example.com .')
+//            ->assertExitCode(0);
+//
+//        $this->assertCommandCalled('dns:update', [
+//            'domain' => 'example.com',
+//            '--type' => 'a',
+//            '--name' => 'example.com',
+//            '--content' => '1.2.3.4',
+//        ]);
+//
 //        $this->markTestIncomplete('This test has not been implemented yet.');
 //    }
-//
+
     /*
      * dns:delete            Delete DNS Record
      */

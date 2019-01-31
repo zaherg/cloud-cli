@@ -19,6 +19,7 @@ class UpdateRecordCommand extends Command
     use CommonTrait;
 
     protected $data;
+    protected $record;
 
     /**
      * The signature of the command.
@@ -87,7 +88,7 @@ class UpdateRecordCommand extends Command
         $this->setRecordName();
 
         // check for the existence of the record before we continue
-        $this->existedDnsRecord();
+        $this->record = $this->existedDnsRecord();
 
         if ($this->option('change-name')) {
             $this->setNewRecordName();
@@ -122,13 +123,12 @@ class UpdateRecordCommand extends Command
     {
         try {
             $zoneID = $this->zones->getZoneID($this->domain);
-            $record = $this->getRecordId();
 
-            $status = $this->dns->updateRecordDetails($zoneID, $record->id, $this->data);
+            $status = $this->dns->updateRecordDetails($zoneID, $this->record->id, $this->data);
 
-            $status ? $this->info(sprintf(
+            $status->success ? $this->info(sprintf(
                 'The record %s has been updated within DNS Zone : %s .',
-                $this->newRecordName,
+                $this->data['name'],
                 $this->domain
             ))
                 : $this->fail('Sorry, something went wrong and we couldn\'t add the new record to your DNS Zone.');
@@ -143,13 +143,16 @@ class UpdateRecordCommand extends Command
         }
     }
 
-    private function existedDnsRecord(): void
+
+    private function existedDnsRecord(): \stdClass
     {
         $record = $this->getRecordId();
 
         if (null === $record) {
             throw new RecordNotFoundException('Sorry, we couldn\'t find the record you asked for.');
         }
+
+        return $record;
     }
 
     /**
@@ -159,7 +162,7 @@ class UpdateRecordCommand extends Command
     {
         try {
             $zoneID = $this->zones->getZoneID($this->domain);
-            $name = $this->recordName . '.' . $this->domain;
+            $name = $this->domain !== $this->recordName ? $this->recordName . '.' . $this->domain : $this->domain;
 
             return collect($this->dns->listRecords($zoneID, '', $name)->result)->first();
         } catch (EndpointException $exception) {
