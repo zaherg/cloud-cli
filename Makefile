@@ -14,4 +14,4 @@ lint:
 	php ./vendor/bin/phpmd tests/ text cleancode,codesize,controversial,design,naming,unusedcode
 
 test:
-	php ./vendor/bin/phpunit --configuration ./phpunit.xml.dist
+	php ./vendor/bin/phpunit --configuration ./phpunit.xml.dist --testdox

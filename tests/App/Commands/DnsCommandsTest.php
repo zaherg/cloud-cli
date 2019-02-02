@@ -92,46 +92,40 @@ class DnsCommandsTest extends TestCase
     /*
      * dns:update            Update DNS Record
      */
-//    public function testDnsEditCommand(): void
-//    {
-//        $this->mockZone();
-//
-////        $dns = $this->createMock(DNS::class);
-//        $dns = $this->getMockBuilder(DNS::class)
-//            ->setMethods(['listRecords'])
-//            ->getMock();
-//
-//        $dns->method('listRecords')
-//            ->willReturn($this->getFixtures('listRecords'));
-//
-//        $dns->method('updateRecordDetails')
-//            ->with(
-//                $this->equalTo('023e105f4ecef8ad9ca31a8372d0c353'),
-//                $this->equalTo('372e67954025e0ba6aaa6d586b9e0b59'),
-//                ['type' => 'A', 'name' => 'example.com', 'content' => '1.2.3.4']
-//            )
-//            ->willReturn(true);
-//
-//        $this->instance(DNS::class, $dns);
-//
-//        $this->artisan('dns:update', [
-//            'domain' => 'example.com',
-//            '--type' => 'a',
-//            '--name' => 'example.com',
-//            '--content' => '1.2.3.4',
-//        ])
-//            ->expectsOutput('The record example.com has been updated within DNS Zone : example.com .')
-//            ->assertExitCode(0);
-//
-//        $this->assertCommandCalled('dns:update', [
-//            'domain' => 'example.com',
-//            '--type' => 'a',
-//            '--name' => 'example.com',
-//            '--content' => '1.2.3.4',
-//        ]);
-//
-//        $this->markTestIncomplete('This test has not been implemented yet.');
-//    }
+    public function testDnsEditCommand(): void
+    {
+        $this->mockZone();
+
+        $dns = $this->createMock(DNS::class);
+        $dns->method('listRecords')
+            ->willReturn($this->getFixtures('listRecords'));
+
+        $dns->method('updateRecordDetails')
+            ->with(
+                $this->equalTo('023e105f4ecef8ad9ca31a8372d0c353'),
+                $this->equalTo('372e67954025e0ba6aaa6d586b9e0b59'),
+                ['type' => 'A', 'name' => 'example.com', 'content' => '1.2.3.4']
+            )
+            ->willReturn($this->getFixtures('updateDNSRecord'));
+
+        $this->instance(DNS::class, $dns);
+
+        $this->artisan('dns:update', [
+            'domain' => 'example.com',
+            '--type' => 'a',
+            '--name' => 'example.com',
+            '--content' => '1.2.3.4',
+        ])
+            ->expectsOutput('The record example.com has been updated within DNS Zone : example.com .')
+            ->assertExitCode(0);
+
+        $this->assertCommandCalled('dns:update', [
+            'domain' => 'example.com',
+            '--type' => 'a',
+            '--name' => 'example.com',
+            '--content' => '1.2.3.4',
+        ]);
+    }
 
     /*
      * dns:delete            Delete DNS Record
@@ -150,11 +144,11 @@ class DnsCommandsTest extends TestCase
 
         $this->instance(DNS::class, $dns);
 
-        $this->artisan('dns:delete',[
+        $this->artisan('dns:delete', [
             'domain' => 'example.com',
-            '--name' => 'example.com'
+            '--name' => 'example.com',
         ])
-            ->expectsQuestion('Are you sure you want to delete the record example.com ?','yes')
+            ->expectsQuestion('Are you sure you want to delete the record example.com ?', 'yes')
             ->expectsOutput('The record example.com has been deleted from your DNS Zone : example.com .')
             ->assertExitCode(0);
 
@@ -181,19 +175,17 @@ class DnsCommandsTest extends TestCase
         $this->artisan('dns:delete')
             ->expectsQuestion('What is the domain name for the zone', 'example.com')
             ->expectsQuestion('What is the name of the record you want to delete', 'example.com')
-            ->expectsQuestion('Are you sure you want to delete the record example.com ?','yes')
+            ->expectsQuestion('Are you sure you want to delete the record example.com ?', 'yes')
             ->expectsOutput('The record example.com has been deleted from your DNS Zone : example.com .')
             ->assertExitCode(0);
 
         $this->assertCommandCalled('dns:delete');
-
     }
 
     protected function mockZone()
     {
         return $this->mock(Zones::class)
             ->shouldReceive('getZoneID')
-            ->once()
             ->andReturn('023e105f4ecef8ad9ca31a8372d0c353');
     }
 
@@ -201,7 +193,6 @@ class DnsCommandsTest extends TestCase
     {
         return $this->mock(DNS::class)
             ->shouldReceive($function)
-            ->once()
             ->andReturn($returnedValue);
     }
 

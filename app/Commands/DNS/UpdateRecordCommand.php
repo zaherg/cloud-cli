@@ -46,28 +46,6 @@ class UpdateRecordCommand extends Command
     protected $description = 'Update DNS Record';
 
     /**
-     * The Zones instance.
-     *
-     * @var \Cloudflare\API\Endpoints\Zones
-     */
-    private $zones;
-
-    /**
-     * The DNS instance.
-     *
-     * @var \Cloudflare\API\Endpoints\DNS
-     */
-    private $dns;
-
-    public function __construct(DNS $dns, Zones $zones)
-    {
-        parent::__construct();
-
-        $this->dns = $dns;
-        $this->zones = $zones;
-    }
-
-    /**
      * Interacts with the user.
      *
      * This method is executed before the InputDefinition is validated.
@@ -117,14 +95,17 @@ class UpdateRecordCommand extends Command
     /**
      * Execute the console command.
      *
+     * @param \Cloudflare\API\Endpoints\DNS   $dns
+     * @param \Cloudflare\API\Endpoints\Zones $zones
+     *
      * @return mixed
      */
-    public function handle()
+    public function handle(DNS $dns, Zones $zones)
     {
         try {
-            $zoneID = $this->zones->getZoneID($this->domain);
+            $zoneID = $zones->getZoneID($this->domain);
 
-            $status = $this->dns->updateRecordDetails($zoneID, $this->record->id, $this->data);
+            $status = $dns->updateRecordDetails($zoneID, $this->record->id, $this->data);
 
             $status->success ? $this->info(sprintf(
                 'The record %s has been updated within DNS Zone : %s .',
@@ -143,22 +124,19 @@ class UpdateRecordCommand extends Command
         }
     }
 
-
     private function existedDnsRecord(): \stdClass
     {
-
         try {
-            $zoneID = $this->zones->getZoneID($this->domain);
+            $zoneID = app(Zones::class)->getZoneID($this->domain);
             $name = $this->domain !== $this->recordName ? $this->recordName . '.' . $this->domain : $this->domain;
 
-            $record = collect($this->dns->listRecords($zoneID, '', $name)->result)->first();
+            $record = collect(app(DNS::class)->listRecords($zoneID, '', $name)->result)->first();
 
             if (null === $record) {
                 throw new RecordNotFoundException('Sorry, we couldn\'t find the record you asked for.');
             }
 
             return $record;
-
         } catch (EndpointException $exception) {
             $this->fail('Could not find zones with specified name.');
         }
