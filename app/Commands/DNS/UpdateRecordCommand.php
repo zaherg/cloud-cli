@@ -146,25 +146,19 @@ class UpdateRecordCommand extends Command
 
     private function existedDnsRecord(): \stdClass
     {
-        $record = $this->getRecordId();
 
-        if (null === $record) {
-            throw new RecordNotFoundException('Sorry, we couldn\'t find the record you asked for.');
-        }
-
-        return $record;
-    }
-
-    /**
-     * @return mixed
-     */
-    private function getRecordId()
-    {
         try {
             $zoneID = $this->zones->getZoneID($this->domain);
             $name = $this->domain !== $this->recordName ? $this->recordName . '.' . $this->domain : $this->domain;
 
-            return collect($this->dns->listRecords($zoneID, '', $name)->result)->first();
+            $record = collect($this->dns->listRecords($zoneID, '', $name)->result)->first();
+
+            if (null === $record) {
+                throw new RecordNotFoundException('Sorry, we couldn\'t find the record you asked for.');
+            }
+
+            return $record;
+
         } catch (EndpointException $exception) {
             $this->fail('Could not find zones with specified name.');
         }
