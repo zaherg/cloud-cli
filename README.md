@@ -100,7 +100,7 @@ If you did anything wrong, you can run the command again to recreate the file
 ## TODO:
 
 - [ ] Write more documentation.
-- [ ] Write tests.
+- [x] Write tests.
 
 ## Progress 
 

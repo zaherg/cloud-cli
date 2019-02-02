@@ -42,12 +42,14 @@ class PurgeAllCommand extends Command
         collect($zones->listZones()->result)
             ->each(function ($zone) use ($zones) {
                 try {
-                    $status = $zones->cachePurgeEverything($zone->id) === true ? '<info>successful</info>' : '<fail>failed</fail>';
+                    $status = $zones->cachePurgeEverything($zone->id);
                 } catch (\GuzzleHttp\Exception\ServerException $exception) {
-                    $status = '<fail>failed</fail>';
+                    $status = false;
                 }
 
-                $this->output->writeln(sprintf('Cache purge for %s : %s', $zone->name, $status));
+                $this->task(sprintf('Cache purge for %s ', $zone->name), function () use ($status) {
+                    return $status;
+                });
             });
     }
 }

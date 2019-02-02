@@ -39,4 +39,24 @@ class ZoneCommandsTest extends TestCase
 
         $this->assertCommandCalled('zone:check-activation', ['domain' => 'example.com']);
     }
+
+    public function testPurgeAllCommand(): void
+    {
+        $zone = $this->createMock(Zones::class);
+
+        $zone->method('listZones')
+            ->willReturn($this->getFixtures('listZones'));
+
+        $zone->method('cachePurgeEverything')
+            ->willReturn(true);
+
+        $this->instance(Zones::class, $zone);
+
+        $this->artisan('zone:purge-all')
+            ->expectsOutput('Remove ALL files from Cloudflare\'s cache, for every Website')
+            ->expectsOutput('Cache purge for example.com : ✔')
+            ->assertExitCode(0);
+
+        $this->assertCommandCalled('zone:purge-all');
+    }
 }
