@@ -19,6 +19,7 @@ cache:
 before_install:
   - phpenv config-rm xdebug.ini || true
   - travis_retry composer self-update
+  - travis_retry composer install hirak/prestissimo
 
 install:
   - if [[ $setup = 'stable' ]]; then travis_retry composer update --prefer-dist --no-interaction --prefer-stable --no-suggest; fi
