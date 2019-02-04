@@ -59,4 +59,42 @@ class ZoneCommandsTest extends TestCase
 
         $this->assertCommandCalled('zone:purge-all');
     }
+
+    public function testDeactivateTheDevelopmentModeCommand(): void
+    {
+        $zone = $this->createMock(Zones::class);
+
+        $zone->method('getZoneID')
+            ->willReturn('023e105f4ecef8ad9ca31a8372d0c353');
+
+        $zone->method('changeDevelopmentMode')
+            ->willReturn(true);
+
+        $this->instance(Zones::class, $zone);
+
+        $this->artisan('zone:dev', ['domain' => 'example.com'])
+            ->expectsOutput('We have successfully deactivated the development mode for the zone: example.com.')
+            ->assertExitCode(0);
+
+        $this->assertCommandCalled('zone:dev', ['domain' => 'example.com']);
+    }
+
+    public function testActivateTheDevelopmentModeCommand(): void
+    {
+        $zone = $this->createMock(Zones::class);
+
+        $zone->method('getZoneID')
+            ->willReturn('023e105f4ecef8ad9ca31a8372d0c353');
+
+        $zone->method('changeDevelopmentMode')
+            ->willReturn(true);
+
+        $this->instance(Zones::class, $zone);
+
+        $this->artisan('zone:dev', ['domain' => 'example.com', '--enable' => true])
+            ->expectsOutput('We have successfully activated the development mode for the zone: example.com.')
+            ->assertExitCode(0);
+
+        $this->assertCommandCalled('zone:dev', ['domain' => 'example.com', '--enable' => true]);
+    }
 }
