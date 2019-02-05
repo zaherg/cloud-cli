@@ -39,7 +39,7 @@ class Handler extends ExceptionHandler
      *
      * @throws \Exception
      */
-    public function report(Exception $exception)
+    public function report(Exception $exception): void
     {
         if (config('app.production')) {
             foreach ($this->dontReportMessages as $type => $messages) {

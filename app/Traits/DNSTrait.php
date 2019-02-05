@@ -46,7 +46,7 @@ trait DNSTrait
         $this->domain = $this->argument('domain');
     }
 
-    private function showIntro()
+    private function showIntro(): void
     {
         $displayed = false;
         $message = 'Please answer the following questions:';

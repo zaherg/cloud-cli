@@ -40,7 +40,7 @@ class PurgeAllCommand extends Command
         $this->output->title($this->description);
 
         collect($zones->listZones()->result)
-            ->each(function ($zone) use ($zones) {
+            ->each(function ($zone) use ($zones): void {
                 try {
                     $status = $zones->cachePurgeEverything($zone->id);
                 } catch (\GuzzleHttp\Exception\ServerException $exception) {

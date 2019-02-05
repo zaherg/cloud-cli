@@ -119,7 +119,7 @@ class DeleteRecordCommand extends Command
         } catch (ClientException $exception) {
             $errors = collect(json_decode((string) $exception->getResponse()->getBody())->errors);
 
-            $errors->each(function ($error) {
+            $errors->each(function ($error): void {
                 $this->fail($error->message);
             });
         } catch (RecordNotFoundException $exception) {

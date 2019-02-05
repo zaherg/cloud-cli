@@ -83,19 +83,21 @@ class DevelopmentCommand extends Command
         try {
             $zoneId = $zones->getZoneID($this->domain);
 
-            $message = sprintf('We have successfully %s the development mode for the zone: %s.',
-                $this->dev ? 'activated' : 'deactivated', $this->domain);
+            $message = sprintf(
+                'We have successfully %s the development mode for the zone: %s.',
+                $this->dev ? 'activated' : 'deactivated',
+                $this->domain
+            );
 
             $zones->changeDevelopmentMode($zoneId, $this->dev) ?
                 $this->info($message) :
                 $this->fail('Something went wrong.');
-
         } catch (EndpointException $exception) {
             $this->fail('Could not find zones with specified name.');
         } catch (ClientException $exception) {
             $errors = collect(json_decode((string) $exception->getResponse()->getBody())->errors);
 
-            $errors->each(function ($error) {
+            $errors->each(function ($error): void {
                 $this->fail($error->message);
             });
         }
