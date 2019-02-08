@@ -110,4 +110,17 @@ class ZoneCommandsTest extends TestCase
 
         $this->assertCommandCalled('zone:add', ['domain' => 'example.com']);
     }
+
+    public function testFailToAddNewZoneCommand(): void
+    {
+        $this->mock(Zones::class)
+            ->shouldReceive('addZone')
+            ->andReturn($this->getFixtures('addZone')->result);
+
+        $this->artisan('zone:add', ['domain' => 'example'])
+            ->expectsOutput('[Error] The domain that you have provided is not a valid domain name')
+            ->assertExitCode(0);
+
+        $this->assertCommandCalled('zone:add', ['domain' => 'example']);
+    }
 }
