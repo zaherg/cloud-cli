@@ -24,6 +24,6 @@ return PhpCsFixer\Config::create()
         'strict_param' => true,
         'trailing_comma_in_multiline_array' => true,
         'yoda_style' => false,
-	'void_return' => true,
+	    'void_return' => true,
     ])
     ->setFinder($finder);

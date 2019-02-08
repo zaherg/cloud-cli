@@ -6,36 +6,26 @@ use App\Traits\CommonTrait;
 use Cloudflare\API\Endpoints\Zones;
 use GuzzleHttp\Exception\ClientException;
 use LaravelZero\Framework\Commands\Command;
-use Cloudflare\API\Endpoints\EndpointException;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class DevelopmentCommand extends Command
+class AddZoneCommand extends Command
 {
     use CommonTrait;
-
     /**
      * The signature of the command.
      *
      * @var string
      */
-    protected $signature = 'zone:dev
-                            {--enable : Whether we should activate or deactivate the mode, if supplied we will activate it.}
-                            {domain : The domain name}';
+    protected $signature = 'zone:add
+                           {domain : The domain name that you need, max length: 253.}';
 
     /**
      * The description of the command.
      *
      * @var string
      */
-    protected $description = 'Change the status of the Development Mode';
-
-    /**
-     * The status of the development.
-     *
-     * @var bool
-     */
-    private $dev;
+    protected $description = 'Create a new Zone';
 
     /**
      * Initializes the command after the input has been bound and before the input
@@ -53,7 +43,6 @@ class DevelopmentCommand extends Command
     protected function initialize(InputInterface $input, OutputInterface $output): void
     {
         $this->domain = $this->argument('domain');
-        $this->dev = $this->option('enable');
     }
 
     /**
@@ -80,24 +69,27 @@ class DevelopmentCommand extends Command
      */
     public function handle(Zones $zones)
     {
-        try {
-            $zoneId = $zones->getZoneID($this->domain);
+        if ($this->checkDomainName($this->domain)) {
+            try {
+                $zones->addZone($this->domain);
 
-            $message = sprintf(
-                'We have successfully %s the development mode for the zone: %s.',
-                $this->dev ? 'activated' : 'deactivated',
-                $this->domain
-            );
-
-            $zones->changeDevelopmentMode($zoneId, $this->dev) ?
-                $this->info($message) :
-                $this->fail('Something went wrong.');
-        } catch (EndpointException $exception) {
-            $this->fail('Could not find zones with specified name.');
-        } catch (ClientException $exception) {
-            ClientException($exception)->each(function ($message): void {
-                $this->fail($message);
-            });
+                $this->info(sprintf(
+                    'Domain %s has been added successfully, please remember to update the DNS records',
+                    $this->domain
+                ));
+            } catch (ClientException $exception) {
+                ClientException($exception)->each(function ($message): void {
+                    $this->fail($message);
+                });
+            }
+        } else {
+            $this->fail('The domain that you have provided is not a valid domain name');
         }
+    }
+
+    private function checkDomainName($domain): bool
+    {
+        return preg_match('/^([a-zA-Z0-9][\-a-zA-Z0-9]*\.)+[\-a-zA-Z0-9]{2,20}$/i', $domain)
+            && (strlen($domain) < 253);
     }
 }

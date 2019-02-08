@@ -97,4 +97,17 @@ class ZoneCommandsTest extends TestCase
 
         $this->assertCommandCalled('zone:dev', ['domain' => 'example.com', '--enable' => true]);
     }
+
+    public function testAddingNewZoneCommand(): void
+    {
+        $this->mock(Zones::class)
+            ->shouldReceive('addZone')
+            ->andReturn($this->getFixtures('addZone')->result);
+
+        $this->artisan('zone:add', ['domain' => 'example.com'])
+            ->expectsOutput('Domain example.com has been added successfully, please remember to update the DNS records')
+            ->assertExitCode(0);
+
+        $this->assertCommandCalled('zone:add', ['domain' => 'example.com']);
+    }
 }
