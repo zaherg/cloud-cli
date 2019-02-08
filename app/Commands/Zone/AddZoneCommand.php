@@ -69,27 +69,19 @@ class AddZoneCommand extends Command
      */
     public function handle(Zones $zones)
     {
-        if ($this->checkDomainName($this->domain)) {
-            try {
-                $zones->addZone($this->domain);
+        $this->checkDomainName($this->domain);
 
-                $this->info(sprintf(
+        try {
+            $zones->addZone($this->domain);
+
+            $this->info(sprintf(
                     'Domain %s has been added successfully, please remember to update the DNS records',
                     $this->domain
                 ));
-            } catch (ClientException $exception) {
-                ClientException($exception)->each(function ($message): void {
-                    $this->fail($message);
-                });
-            }
-        } else {
-            $this->fail('The domain that you have provided is not a valid domain name');
+        } catch (ClientException $exception) {
+            ClientException($exception)->each(function ($message): void {
+                $this->fail($message);
+            });
         }
-    }
-
-    private function checkDomainName($domain): bool
-    {
-        return preg_match('/^([a-zA-Z0-9][\-a-zA-Z0-9]*\.)+[\-a-zA-Z0-9]{2,20}$/i', $domain)
-            && (strlen($domain) < 253);
     }
 }

@@ -55,4 +55,17 @@ trait CommonTrait
             $this->input->setInteractive(true);
         }
     }
+
+    private function checkDomainName($domain): bool
+    {
+        $result = preg_match('/^([a-zA-Z0-9][\-a-zA-Z0-9]*\.)+[\-a-zA-Z0-9]{2,20}$/i', $domain)
+            && (strlen($domain) < 253);
+
+        if (! $result) {
+            $this->fail('The domain that you have provided is not a valid domain name');
+            exit(0);
+        }
+
+        return true;
+    }
 }
