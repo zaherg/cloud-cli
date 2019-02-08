@@ -13,3 +13,16 @@ if (! function_exists('getEnvPath')) {
         return getenv('HOME') . DIRECTORY_SEPARATOR . '.cloudflare';
     }
 }
+
+if (! function_exists('ClientException')) {
+    function ClientException($exception)
+    {
+        $errors = collect(json_decode((string) $exception->getResponse()->getBody())->errors);
+
+        $messages = $errors->map(function ($error) {
+            return $error->message;
+        });
+
+        return $messages;
+    }
+}
