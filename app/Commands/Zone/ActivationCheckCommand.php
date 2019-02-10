@@ -47,10 +47,8 @@ class ActivationCheckCommand extends Command
         } catch (EndpointException $exception) {
             $this->fail('Could not find zones with specified name.');
         } catch (ClientException $exception) {
-            $errors = collect(json_decode((string) $exception->getResponse()->getBody())->errors);
-
-            $errors->each(function ($error): void {
-                $this->fail($error->message);
+            ClientException($exception)->each(function ($message): void {
+                $this->fail($message);
             });
         }
     }
