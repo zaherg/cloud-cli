@@ -9,6 +9,7 @@ use LaravelZero\Framework\Commands\Command;
 class ListZonesCommand extends Command
 {
     use CommonTrait;
+
     /**
      * The signature of the command.
      *

@@ -2,6 +2,7 @@
 
 namespace App\Commands\Zone;
 
+use App\Traits\ZonesTrait;
 use App\Traits\CommonTrait;
 use Cloudflare\API\Endpoints\Zones;
 use GuzzleHttp\Exception\ClientException;
@@ -13,6 +14,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class DevelopmentCommand extends Command
 {
     use CommonTrait;
+    use ZonesTrait;
 
     /**
      * The signature of the command.
@@ -54,21 +56,6 @@ class DevelopmentCommand extends Command
     {
         $this->domain = $this->argument('domain');
         $this->dev = $this->option('enable');
-    }
-
-    /**
-     * Interacts with the user.
-     *
-     * This method is executed before the InputDefinition is validated.
-     * This means that this is the only place where the command can
-     * interactively ask for values of missing required arguments.
-     *
-     * @param \Symfony\Component\Console\Input\InputInterface   $input
-     * @param \Symfony\Component\Console\Output\OutputInterface $output
-     */
-    protected function interact(InputInterface $input, OutputInterface $output): void
-    {
-        $this->setDomainArgument();
     }
 
     /**
