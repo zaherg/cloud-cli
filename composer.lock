@@ -1122,16 +1122,16 @@
         },
         {
             "name": "laravel-zero/framework",
-            "version": "v5.7.19",
+            "version": "v5.7.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel-zero/framework.git",
-                "reference": "a938a5a1d7542b5689778c69a51aa7da94cc9048"
+                "reference": "f958a0fa8f9353e36640152953c4be2c3ab71949"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel-zero/framework/zipball/a938a5a1d7542b5689778c69a51aa7da94cc9048",
-                "reference": "a938a5a1d7542b5689778c69a51aa7da94cc9048",
+                "url": "https://api.github.com/repos/laravel-zero/framework/zipball/f958a0fa8f9353e36640152953c4be2c3ab71949",
+                "reference": "f958a0fa8f9353e36640152953c4be2c3ab71949",
                 "shasum": ""
             },
             "require": {
@@ -1194,7 +1194,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2019-01-04T16:03:17+00:00"
+            "time": "2019-02-11T07:47:09+00:00"
         },
         {
             "name": "league/flysystem",
@@ -3215,16 +3215,16 @@
         },
         {
             "name": "friendsofphp/php-cs-fixer",
-            "version": "v2.14.0",
+            "version": "v2.14.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfPHP/PHP-CS-Fixer.git",
-                "reference": "b788ea0af899cedc8114dca7db119c93b6685da2"
+                "reference": "2e82abd1322897eb8aacb861e5ff551af3888349"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/b788ea0af899cedc8114dca7db119c93b6685da2",
-                "reference": "b788ea0af899cedc8114dca7db119c93b6685da2",
+                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/2e82abd1322897eb8aacb861e5ff551af3888349",
+                "reference": "2e82abd1322897eb8aacb861e5ff551af3888349",
                 "shasum": ""
             },
             "require": {
@@ -3271,11 +3271,6 @@
                 "php-cs-fixer"
             ],
             "type": "application",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.14-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "PhpCsFixer\\": "src/"
@@ -3307,7 +3302,7 @@
                 }
             ],
             "description": "A tool to automatically fix PHP code style",
-            "time": "2019-01-04T18:29:47+00:00"
+            "time": "2019-02-10T22:52:33+00:00"
         },
         {
             "name": "hamcrest/hamcrest-php",

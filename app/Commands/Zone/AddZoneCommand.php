@@ -19,7 +19,7 @@ class AddZoneCommand extends Command
      * @var string
      */
     protected $signature = 'zone:add
-                           {domain : The domain name that you need, max length: 253.}';
+                           {domain : The domain name that you need to add, max length: 253.}';
 
     /**
      * The description of the command.
@@ -43,8 +43,8 @@ class AddZoneCommand extends Command
             $zones->addZone($this->domain);
 
             $this->info(sprintf(
-                    'Domain %s has been added successfully, please remember to update the DNS records',
-                    $this->domain
+                'Domain %s has been added successfully, please remember to update the DNS records',
+                $this->domain
                 ));
         } catch (ClientException $exception) {
             ClientException($exception)->each(function ($message): void {
