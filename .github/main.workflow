@@ -9,7 +9,7 @@ workflow "CI" {
 
 action "Install dependencies" {
   uses = "pxgamer/composer-action@master"
-  args = "install --prefer-dist --no-interaction --prefer-stable --no-suggest"
+  args = "install --prefer-dist --no-interaction --no-suggest"
 }
 
 action "Run tests (PHP 7.1)" {
