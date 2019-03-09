@@ -1,7 +1,6 @@
 <?php
 
 return [
-
     /*
     |--------------------------------------------------------------------------
     | Enabled
@@ -11,7 +10,7 @@ return [
     | ASCII logo. This file provides a sane default location for all
     | information concerning the logo and is display customization.
     |
-    */
+     */
 
     'enabled' => true,
 
@@ -24,7 +23,7 @@ return [
     | By default, one default font is shipped. However, you are free
     | to download and use additional fonts: http://www.figlet.org.
     |
-    */
+     */
 
     'font' => \LaravelZero\Framework\Components\Logo\FigletString::DEFAULT_FONT,
 
@@ -37,7 +36,7 @@ return [
     | used for word-wrap as well as justification. Be careful when using
     | small values, because they may result in an undefined behavior.
     |
-    */
+     */
 
     'outputWidth' => 80,
 
@@ -50,7 +49,7 @@ return [
     | justification is provided, which will work well on most of your
     | console apps. Of course, you are free to change this value.
     |
-    */
+     */
 
     'justification' => null,
 
@@ -65,8 +64,7 @@ return [
     |
     | Possible values: "right-to-left", "left-to-right", null
     |
-    */
+     */
 
     'rightToLeft' => null,
-
 ];

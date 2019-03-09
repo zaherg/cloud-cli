@@ -5,7 +5,7 @@ return [
     'disks' => [
         'local' => [
             'driver' => 'local',
-            'root' => sprintf('%s/.cloudflare',getenv('HOME')),
+            'root' => sprintf('%s/.cloudflare', getenv('HOME')),
         ],
     ],
 ];
