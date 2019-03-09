@@ -53,34 +53,13 @@ $app = new LaravelZero\Framework\Application(
 
 $app->singleton(
     Illuminate\Contracts\Console\Kernel::class,
-    LaravelZero\Framework\Kernel::class
+    App\Kernel\Kernel::class
 );
-
-//$app->singleton(
-//    Illuminate\Contracts\Debug\ExceptionHandler::class,
-//    Illuminate\Foundation\Exceptions\Handler::class
-//);
 
 $app->singleton(
     Illuminate\Contracts\Debug\ExceptionHandler::class,
     App\Exceptions\Handler::class
 );
-
-/*
-|--------------------------------------------------------------------------
-| Set the correct path for the environment file
-|--------------------------------------------------------------------------
-|
-| If the current directory has a .env file then we will use that instead
-| of the global one, other wise the one under the user homepage.
-|
- */
-
-$app->instance('path.env', getEnvPath());
-
-if (! file_exists(dirname(__DIR__) . DIRECTORY_SEPARATOR . '.env')) {
-    $app->useEnvironmentPath(getEnvPath());
-}
 
 /*
 |--------------------------------------------------------------------------
