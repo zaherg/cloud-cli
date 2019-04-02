@@ -6,5 +6,5 @@ workflow "CI" {
 }
 
 action "PHPUnit Action" {
-  uses = "linuxjuggler/phpunit-action@0.1"
+  uses = "linuxjuggler/phpunit-action@v0.1"
 }
