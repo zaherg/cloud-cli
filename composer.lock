@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "cloudflare/sdk",
-            "version": "1.1.3",
+            "version": "1.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cloudflare/cloudflare-php.git",
-                "reference": "7aa3a118aff97fb86849cdbb123d10cea6eeb2ee"
+                "reference": "9b9738910d927031fe34924261f4d76a63fcd322"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cloudflare/cloudflare-php/zipball/7aa3a118aff97fb86849cdbb123d10cea6eeb2ee",
-                "reference": "7aa3a118aff97fb86849cdbb123d10cea6eeb2ee",
+                "url": "https://api.github.com/repos/cloudflare/cloudflare-php/zipball/9b9738910d927031fe34924261f4d76a63fcd322",
+                "reference": "9b9738910d927031fe34924261f4d76a63fcd322",
                 "shasum": ""
             },
             "require": {
@@ -48,7 +48,7 @@
                 }
             ],
             "description": "PHP binding for v4 of the Cloudflare Client API.",
-            "time": "2019-05-08T18:56:24+00:00"
+            "time": "2019-06-07T15:34:38+00:00"
         },
         {
             "name": "composer/ca-bundle",
@@ -4100,16 +4100,16 @@
         },
         {
             "name": "phpunit/php-timer",
-            "version": "2.1.1",
+            "version": "2.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/php-timer.git",
-                "reference": "8b389aebe1b8b0578430bda0c7c95a829608e059"
+                "reference": "1038454804406b0b5f5f520358e78c1c2f71501e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/php-timer/zipball/8b389aebe1b8b0578430bda0c7c95a829608e059",
-                "reference": "8b389aebe1b8b0578430bda0c7c95a829608e059",
+                "url": "https://api.github.com/repos/sebastianbergmann/php-timer/zipball/1038454804406b0b5f5f520358e78c1c2f71501e",
+                "reference": "1038454804406b0b5f5f520358e78c1c2f71501e",
                 "shasum": ""
             },
             "require": {
@@ -4145,7 +4145,7 @@
             "keywords": [
                 "timer"
             ],
-            "time": "2019-02-20T10:12:59+00:00"
+            "time": "2019-06-07T04:22:29+00:00"
         },
         {
             "name": "phpunit/php-token-stream",
