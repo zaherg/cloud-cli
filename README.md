@@ -1,3 +1,5 @@
+> This project has been **abandoned**, as I cant see any value from having a CLI any more.
+
 # Cloud CLI Application for Cloudflare®
 
 [![Build Status](https://secure.travis-ci.org/linuxjuggler/cloud-cli.svg)](http://travis-ci.org/linuxjuggler/cloud-cli)
